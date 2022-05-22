@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        updateUI(currentUser)
+//        updateUI(currentUser)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
