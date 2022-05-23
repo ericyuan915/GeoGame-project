@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "461549182572-smi4jnjcf3gavmtfb94trkg3k2mgd44e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.ucsb.cs.cs184.trungbui.cs184project",
+            "certificate_hash": "999e56c17c6ad1e4d0059079adde669e1381222b"
+          }
+        },
+        {
           "client_id": "461549182572-l58m4d4nvumpm0n5b3df5fpso4ol061j.apps.googleusercontent.com",
           "client_type": 3
         }
