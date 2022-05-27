@@ -34,6 +34,21 @@ android {
     buildFeatures {
         viewBinding true
     }
+    signingConfigs {
+
+        debug {
+            keyAlias 'cs184team3'
+            keyPassword 'cs184team3'
+            storePassword 'cs184team3'
+            storeFile file('../keystore/cs184team3.keystore')
+        }
+
+        buildTypes {
+            debug {
+                signingConfig signingConfigs.debug
+            }
+        }
+    }
 }
 
 dependencies {
