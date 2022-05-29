@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="edu.ucsb.cs.cs184.trungbui.cs184project.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_multichoice"
+        android:name="edu.ucsb.cs.cs184.trungbui.cs184project.ui.multichoice.MultichoiceFragment"
+        android:label="@string/menu_multichoice"
+        tools:layout="@layout/fragment_multichoice" />
 
     <fragment
         android:id="@+id/nav_google_maps"
