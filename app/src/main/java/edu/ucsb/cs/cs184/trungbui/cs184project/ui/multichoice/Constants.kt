@@ -62,45 +62,45 @@ object Constants {
 
         // 6
         val que6 = Question(
-            6, "What country does this flag belong to?",
-            "Germany", "Georgia",
-            "Greece", "none of these", 1
+            6, "What is the capital of South Carolina?",
+            "Columbia", "Charleston",
+            "Clemson", "Myrtle Beach", 1
         )
 
         questionsList.add(que6)
 
         // 7
         val que7 = Question(
-            7, "What country does this flag belong to?",
-            "Dominica", "Egypt",
-            "Denmark", "Ethiopia", 3
+            7, "What is the capital of Ohio?",
+            "Cleveland", "Toledo",
+            "Columbus", "Cincinnati", 3
         )
 
         questionsList.add(que7)
 
         // 8
         val que8 = Question(
-            8, "What country does this flag belong to?",
-            "Ireland", "Iran",
-            "Hungary", "India", 4
+            8, "What is the capital of New York?",
+            "New York", "Rochester",
+            "Albany", "Albany", 4
         )
 
         questionsList.add(que8)
 
         // 9
         val que9 = Question(
-            9, "What country does this flag belong to?",
-            "Australia", "New Zealand",
-            "Tuvalu", "United States of America", 2
+            9, "What is the capital of Pennsylvania?",
+            "Philadelphia","Harrisburg",
+            "Pittsburgh", "Scranton", 2
         )
 
         questionsList.add(que9)
 
         // 10
         val que10 = Question(
-            10, "What country does this flag belong to?",
-            "Kuwait", "Jordan",
-            "Sudan", "Palestine", 1
+            10, "What is the capital of Texas?",
+            "Austin", "Dallas",
+            "Houston", "San Antonio", 1
         )
 
         questionsList.add(que10)
