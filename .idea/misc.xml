@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Dylan'sXPS/AndroidStudioProjects/cs184-project/app/src/main/res/drawable/correct_option_border_bg.xml" value="0.108" />
+        <entry key="..\:/Users/Dylan'sXPS/AndroidStudioProjects/cs184-project/app/src/main/res/drawable/default_option_border_bg.xml" value="0.198" />
+        <entry key="..\:/Users/Dylan'sXPS/AndroidStudioProjects/cs184-project/app/src/main/res/drawable/selected_option_border_bg.xml" value="0.108" />
+        <entry key="..\:/Users/Dylan'sXPS/AndroidStudioProjects/cs184-project/app/src/main/res/drawable/wrong_option_border_bg.xml" value="0.108" />
         <entry key="..\:/Users/Dylan'sXPS/AndroidStudioProjects/cs184-project/app/src/main/res/layout/fragment_gallery.xml" value="0.2296875" />
         <entry key="..\:/Users/Dylan'sXPS/AndroidStudioProjects/cs184-project/app/src/main/res/layout/fragment_google_maps.xml" value="0.2296875" />
+        <entry key="..\:/Users/Dylan'sXPS/AndroidStudioProjects/cs184-project/app/src/main/res/layout/fragment_multichoice.xml" value="0.2296875" />
         <entry key="..\:/Users/Dylan'sXPS/AndroidStudioProjects/cs184-project/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.20018115942028986" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2675708052040874" />
