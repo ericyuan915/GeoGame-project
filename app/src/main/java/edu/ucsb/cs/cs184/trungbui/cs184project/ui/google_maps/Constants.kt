@@ -33,7 +33,7 @@ object Constants {
 
         // 3
         val que3 = Question(
-            3, 41.25, 30.08, "New York",
+            3, 41.25, -76.22, "New York",
             "Pennsylvania", "Nevada", "Connecticut", 2
         )
 

@@ -249,16 +249,16 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
 //        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,5.0f))
 
 
-//        try {
-//            val success = googleMap.setMapStyle(
-//                activity?.let {
-//                    MapStyleOptions.loadRawResourceStyle(
-//                        it, R.raw.style_json
-//                    )
-//                }
-//            )
-//        } catch (e: Resources.NotFoundException) {
-//        }
+        try {
+            val success = googleMap.setMapStyle(
+                activity?.let {
+                    MapStyleOptions.loadRawResourceStyle(
+                        it, R.raw.style_json
+                    )
+                }
+            )
+        } catch (e: Resources.NotFoundException) {
+        }
 
         with(mMap.uiSettings) {
             isZoomControlsEnabled = false
