@@ -1,24 +1,26 @@
 package edu.ucsb.cs.cs184.trungbui.cs184project.ui.google_maps
 
+import android.content.res.Resources
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentGoogleMapsBinding
-import android.graphics.Color
-import android.graphics.Typeface
-import androidx.core.content.ContextCompat
-import edu.ucsb.cs.cs184.trungbui.cs184project.R
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
+import edu.ucsb.cs.cs184.trungbui.cs184project.R
+import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentGoogleMapsBinding
+
 
 class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
 
@@ -42,23 +44,12 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val GoogleMapsViewModel =
-            ViewModelProvider(this).get(GoogleMapsViewModel::class.java)
 
         _binding = FragmentGoogleMapsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         mUserName = "username"
         // END
-
-        mQuestionsList = Constants.getQuestions()
-
-        setQuestion()
-        binding.tvOptionOne.setOnClickListener(this)
-        binding.tvOptionTwo.setOnClickListener(this)
-        binding.tvOptionThree.setOnClickListener(this)
-        binding.tvOptionFour.setOnClickListener(this)
-        binding.btnSubmit.setOnClickListener(this)
 
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -161,7 +152,12 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
         binding.progressBar.progress = mCurrentPosition
         binding.tvProgress.text = "$mCurrentPosition" + "/" + binding.progressBar.getMax()
 
-        binding.tvQuestion.text = question.lat.toString() + ", " + question.long.toString()
+        val new_coord = LatLng(question.lat, question.long)
+        mMap.addMarker(MarkerOptions()
+            .position(new_coord)
+            .title("Point in the US"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new_coord,6.0f))
+
         binding.tvOptionOne.text = question.optionOne
         binding.tvOptionTwo.text = question.optionTwo
         binding.tvOptionThree.text = question.optionThree
@@ -245,12 +241,41 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(38.58, -121.49)
-        mMap.addMarker(MarkerOptions()
-            .position(sydney)
-            .title("Marker in CA"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,5.0f))
+        // Add a marker in CA and move the camera
+//        val sydney = LatLng(38.58, -121.49)
+//        mMap.addMarker(MarkerOptions()
+//            .position(sydney)
+//            .title("Marker in CA"))
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,5.0f))
+
+
+//        try {
+//            val success = googleMap.setMapStyle(
+//                activity?.let {
+//                    MapStyleOptions.loadRawResourceStyle(
+//                        it, R.raw.style_json
+//                    )
+//                }
+//            )
+//        } catch (e: Resources.NotFoundException) {
+//        }
+
+        with(mMap.uiSettings) {
+            isZoomControlsEnabled = false
+            isZoomGesturesEnabled = false
+            isScrollGesturesEnabled = false
+            isTiltGesturesEnabled = false
+            isRotateGesturesEnabled = false
+        }
+
+        mQuestionsList = Constants.getQuestions()
+
+        setQuestion()
+        binding.tvOptionOne.setOnClickListener(this)
+        binding.tvOptionTwo.setOnClickListener(this)
+        binding.tvOptionThree.setOnClickListener(this)
+        binding.tvOptionFour.setOnClickListener(this)
+        binding.btnSubmit.setOnClickListener(this)
 
     }
 

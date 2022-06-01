@@ -17,7 +17,7 @@ object Constants {
 
         // 1
         val que1 = Question(
-            1, 41.72f, -107.01f, "Wyoming",
+            1, 41.72, -107.01, "Wyoming",
             "Idaho", "Illinois", "Florida", 1
         )
 
@@ -25,7 +25,7 @@ object Constants {
 
         // 2
         val que2 = Question(
-            2, 39.53f, -123.10f, "Oregon",
+            2, 39.53, -123.10, "Oregon",
             "Virginia", "Florida", "California", 4
         )
 
@@ -33,7 +33,7 @@ object Constants {
 
         // 3
         val que3 = Question(
-            3, 41.25f, 30.08f, "New York",
+            3, 41.25, 30.08, "New York",
             "Pennsylvania", "Nevada", "Connecticut", 2
         )
 
@@ -41,7 +41,7 @@ object Constants {
 
         // 4
         val que4 = Question(
-            4, 30.08f, -97.29f, "Texas",
+            4, 30.08, -97.29, "Texas",
             "New Mexico", "Idaho", "Kentucky", 1
         )
 
