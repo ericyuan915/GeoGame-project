@@ -12,7 +12,7 @@ import org.w3c.dom.Text
 
 class LeaderboardAdapter(
     private val context: Context,
-    private val dataSource: Array<User>
+    private val dataSource: List<User>
 ) : BaseAdapter() {
 
     private val inflater: LayoutInflater =
