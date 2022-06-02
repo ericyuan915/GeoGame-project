@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="edu.ucsb.cs.cs184.trungbui.cs184project.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_leaderboard"
+        android:name="edu.ucsb.cs.cs184.trungbui.cs184project.ui.leaderboard.LeaderboardFragment"
+        android:label="@string/menu_leaderboard"
+        tools:layout="@layout/fragment_leaderboard" />
 
     <fragment
         android:id="@+id/nav_multichoice"
