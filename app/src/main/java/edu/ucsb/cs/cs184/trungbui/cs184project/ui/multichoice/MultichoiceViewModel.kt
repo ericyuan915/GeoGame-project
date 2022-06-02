@@ -9,5 +9,13 @@ class MultichoiceViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
         value = "This is Multichoice Fragment"
     }
-    val text: LiveData<String> = _text
+    public val userName = MutableLiveData<String>().apply {
+        value = "username"
+    }
+    public val totalQuestions = MutableLiveData<String>().apply {
+        value = ""
+    }
+    public val correctAnswers = MutableLiveData<String>().apply {
+        value = ""
+    }
 }
