@@ -5,4 +5,4 @@ class User(
     val lastName: String,
     var score: Int,
     val email: String
-) { /*...*/ }
+) { }
