@@ -19,6 +19,8 @@
         <entry key="app/src/main/res/layout/fragment_leaderboard.xml" value="0.1033434650455927" />
         <entry key="app/src/main/res/layout/fragment_multichoice.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/fragment_results.xml" value="0.12031408308004053" />
+        <entry key="app/src/main/res/layout/leaderboard_header.xml" value="0.2868897303742599" />
+        <entry key="app/src/main/res/layout/list_item_leaderboard.xml" value="0.35433807373046877" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.24739583333333334" />
         <entry key="app/src/main/res/layout/results.xml" value="0.12031408308004053" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.24739583333333334" />

@@ -35,25 +35,21 @@ class LeaderboardFragment : Fragment() {
         _binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-
         // Fetching the leaderboard list view
         leaderboardListView = root.findViewById<ListView>(R.id.leaderboard_list_view)
-        Log.d("LeaderboardFragment", leaderboardListView.toString())
 
-        val recipeList = Array(3) { index ->
+        // [TODO]: INSERT API CALL TO FETCH ALL USERS INFO
+        val userList: Array<User> = Array(20) { index ->
             User("firstName${index + 1}", "lastName${index + 1}", index + 1, "email${index + 1}")
         }
 
-        val listItems = arrayOfNulls<String>(recipeList.size)
+        // [TODO]: SORT THE USER FROM HIGHEST TO LOWEST SCORE
 
-        for (i in 0 until recipeList.size) {
-            val recipe = recipeList[i]
-            listItems[i] = recipe.email
-        }
+        // Adding header to the row
+        val header = inflater.inflate(R.layout.leaderboard_header, leaderboardListView, false)
+        leaderboardListView.addHeaderView(header)
 
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, listItems)
-        leaderboardListView.adapter = adapter
+        leaderboardListView.adapter = LeaderboardAdapter(requireContext(), userList)
 
         return root
     }
