@@ -1,17 +1,21 @@
 package edu.ucsb.cs.cs184.trungbui.cs184project.ui.multichoice
 
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentMultichoiceBinding
-import android.graphics.Color
-import android.graphics.Typeface
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import edu.ucsb.cs.cs184.trungbui.cs184project.R
+import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentMultichoiceBinding
+
 
 class MultichoiceFragment : Fragment(), View.OnClickListener {
 
@@ -92,16 +96,12 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
                             setQuestion()
                         }
                         else -> {
-
-                            // START
-//                            val intent =
-//                                Intent(this@QuizQuestionsActivity, ResultActivity::class.java)
-//                            intent.putExtra(Constants.USER_NAME, mUserName)
-//                            intent.putExtra(Constants.CORRECT_ANSWERS, mCorrectAnswers)
-//                            intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList!!.size)
-//                            startActivity(intent)
-//                            finish()
-                            // END
+                            val MultichoiceViewModel =
+                                ViewModelProvider(this).get(MultichoiceViewModel::class.java)
+                            MultichoiceViewModel.userName.value = "username"
+                            MultichoiceViewModel.correctAnswers.value = mCorrectAnswers.toString()
+                            MultichoiceViewModel.totalQuestions.value = mCurrentPosition.toString()
+                            findNavController().navigate(R.id.action_nav_multichoice_to_nav_results)
                         }
                     }
                 } else {
