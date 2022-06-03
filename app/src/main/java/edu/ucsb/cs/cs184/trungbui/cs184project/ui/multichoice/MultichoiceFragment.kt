@@ -3,16 +3,20 @@ package edu.ucsb.cs.cs184.trungbui.cs184project.ui.multichoice
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import edu.ucsb.cs.cs184.trungbui.cs184project.R
 import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentMultichoiceBinding
 
@@ -43,18 +47,27 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
         _binding = FragmentMultichoiceBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        mUserName = "username"
-        // END
+        // Firebase authentication check
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val firebaseUser: FirebaseUser? = firebaseAuth.currentUser
+        if (firebaseUser == null) {
+            findNavController().navigate(R.id.nav_home)
+            Toast.makeText(context, "User have not logged in", Toast.LENGTH_SHORT).show()
+        } else {
 
-        mQuestionsList = Constants.getQuestions()
+            mUserName = firebaseUser!!.displayName
+            // END
 
-        setQuestion()
-        binding.tvOptionOne.setOnClickListener(this)
-        binding.tvOptionTwo.setOnClickListener(this)
-        binding.tvOptionThree.setOnClickListener(this)
-        binding.tvOptionFour.setOnClickListener(this)
-        binding.btnSubmit.setOnClickListener(this)
+            mQuestionsList = Constants.getQuestions()
 
+            setQuestion()
+            binding.tvOptionOne.setOnClickListener(this)
+            binding.tvOptionTwo.setOnClickListener(this)
+            binding.tvOptionThree.setOnClickListener(this)
+            binding.tvOptionFour.setOnClickListener(this)
+            binding.btnSubmit.setOnClickListener(this)
+
+        }
         return root
 
     }
