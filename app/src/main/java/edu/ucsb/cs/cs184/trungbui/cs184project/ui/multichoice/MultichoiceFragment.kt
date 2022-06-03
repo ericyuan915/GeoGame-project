@@ -3,7 +3,6 @@ package edu.ucsb.cs.cs184.trungbui.cs184project.ui.multichoice
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -41,8 +39,8 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val MultichoiceViewModel =
-            ViewModelProvider(this).get(MultichoiceViewModel::class.java)
+//        val MultichoiceViewModel =
+//            ViewModelProvider(this).get(MultichoiceViewModel::class.java)
 
         _binding = FragmentMultichoiceBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -115,6 +113,24 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
                             MultichoiceViewModel.correctAnswers.value = mCorrectAnswers.toString()
                             MultichoiceViewModel.totalQuestions.value = mCurrentPosition.toString()
                             findNavController().navigate(R.id.action_nav_multichoice_to_nav_results)
+
+//                            val ldf = ResultsFragment()
+//                            val args = Bundle()
+//                            args.putString("correctAnswers", mCorrectAnswers.toString())
+//                            args.putString("totalQuestions", mCurrentPosition.toString())
+//                            ldf.arguments = args
+//                            requireFragmentManager().beginTransaction().add(R.id.action_nav_multichoice_to_nav_results, ldf).commit()
+
+//                            val transection: FragmentTransaction =
+//                                requireFragmentManager().beginTransaction()
+//                            val mfragment = ResultsFragment()
+//                            val bundle = Bundle()
+//                            bundle.putString("correctAnswers", mCorrectAnswers.toString())
+//                            bundle.putString("totalQuestions", mCurrentPosition.toString())
+//                            mfragment.setArguments(bundle) //data being send to SecondFragment
+//
+//                            transection.replace(R.id.fragment_multichoice, mfragment)
+//                            transection.commit()
                         }
                     }
                 } else {

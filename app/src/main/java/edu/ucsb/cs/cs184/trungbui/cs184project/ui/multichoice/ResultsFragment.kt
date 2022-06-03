@@ -4,15 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentResultsBinding
-import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentMultichoiceBinding
-import android.graphics.Color
-import android.graphics.Typeface
-import androidx.core.content.ContextCompat
-import edu.ucsb.cs.cs184.trungbui.cs184project.R
 
 class ResultsFragment : Fragment() {
 
@@ -38,7 +32,8 @@ class ResultsFragment : Fragment() {
         MultichoiceViewModel.correctAnswers.observe(viewLifecycleOwner) {
             correctAnswers = MultichoiceViewModel.correctAnswers.value.toString()
         }
-
+//        correctAnswers = requireArguments().getString("correctAnswers").toString()
+//        totalQuestions = requireArguments().getString("totalQuestions").toString()
 
         _binding = FragmentResultsBinding.inflate(inflater, container, false)
         val root: View = binding.root
