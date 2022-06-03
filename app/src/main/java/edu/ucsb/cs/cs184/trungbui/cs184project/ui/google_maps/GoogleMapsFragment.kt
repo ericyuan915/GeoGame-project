@@ -17,6 +17,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import edu.ucsb.cs.cs184.trungbui.cs184project.R
 import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentGoogleMapsBinding
@@ -36,6 +37,8 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
     private var mCorrectAnswers: Int = 0
 
     private var mUserName: String? = null
+
+    private var mMarker1: Marker? = null
 
     private lateinit var mMap: GoogleMap
 
@@ -153,10 +156,13 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
         binding.tvProgress.text = "$mCurrentPosition" + "/" + binding.progressBar.getMax()
 
         val new_coord = LatLng(question.lat, question.long)
-        mMap.addMarker(MarkerOptions()
+
+        mMarker1?.remove()
+
+        mMarker1 = mMap.addMarker(MarkerOptions()
             .position(new_coord)
             .title("Point in the US"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new_coord,6.0f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new_coord,5.0f))
 
         binding.tvOptionOne.text = question.optionOne
         binding.tvOptionTwo.text = question.optionTwo

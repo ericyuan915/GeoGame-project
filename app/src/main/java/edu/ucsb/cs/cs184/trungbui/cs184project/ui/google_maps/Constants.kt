@@ -47,6 +47,55 @@ object Constants {
 
         questionsList.add(que4)
 
+        // 5
+        val que5 = Question(
+            5, 41.56, -94.29, "South Dakota",
+            "California", "Iowa", "Montana", 3
+        )
+
+        questionsList.add(que5)
+
+        // 6
+        val que6 = Question(
+            6, 37.84, -89.09, "Illinois",
+            "New York", "Maryland", "Delaware", 1
+        )
+
+        questionsList.add(que6)
+
+        // 7
+        val que7 = Question(
+            7, 43.08, -91.69, "Michigan",
+            "Illinois", "Oregon", "Iowa", 4
+        )
+
+        questionsList.add(que7)
+
+        // 8
+        val que8 = Question(
+            8, 34.58, -95.86, "South Carolina",
+            "New Mexico", "Arizona", "Oklahoma", 4
+        )
+
+        questionsList.add(que8)
+
+        // 9
+        val que9 = Question(
+            9, 44.81, -122.18, "Arizona",
+            "Oregon", "North Carolina", "Ohio", 2
+        )
+
+        questionsList.add(que9)
+
+        // 10
+        val que10 = Question(
+            10, 37.75, -87.40, "Oklahoma",
+            "Kentucky", "California", "South Carolina", 2
+        )
+
+        questionsList.add(que10)
+
+
         return questionsList
     }
 }
