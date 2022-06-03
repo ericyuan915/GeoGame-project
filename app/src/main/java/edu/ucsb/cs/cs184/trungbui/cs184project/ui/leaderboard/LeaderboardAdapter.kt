@@ -38,7 +38,7 @@ class LeaderboardAdapter(
         val rowView = inflater.inflate(R.layout.list_item_leaderboard, parent, false)
         // Extracting user information to put into listView
         val userFirstName = rowView.findViewById<TextView>(R.id.name)
-        userFirstName.text = dataSource[position].firstName
+        userFirstName.text = dataSource[position].name
         val userScore = rowView.findViewById<TextView>(R.id.score)
         userScore.text = dataSource[position].score.toString()
 
