@@ -27,5 +27,19 @@
         android:id="@+id/nav_google_maps"
         android:name="edu.ucsb.cs.cs184.trungbui.cs184project.ui.google_maps.GoogleMapsFragment"
         android:label="@string/menu_google_maps"
-        tools:layout="@layout/fragment_google_maps" />
+        tools:layout="@layout/fragment_google_maps" >
+        <action
+            android:id="@+id/action_nav_google_maps_to_nav_gm_results"
+            app:destination="@id/nav_gm_results" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_gm_results"
+        android:name="edu.ucsb.cs.cs184.trungbui.cs184project.ui.google_maps.GMResultsFragment"
+        android:label="@string/menu_gm_results"
+        tools:layout="@layout/fragment_gm_results" >
+        <action
+            android:id="@+id/action_nav_gm_results_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 </navigation>

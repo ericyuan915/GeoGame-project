@@ -10,4 +10,14 @@ class GoogleMapsViewModel : ViewModel() {
         value = "This is google maps fragment"
     }
     val text: LiveData<String> = _text
+
+    public val userName = MutableLiveData<String>().apply {
+        value = "username"
+    }
+    public val totalQuestions = MutableLiveData<String>().apply {
+        value = ""
+    }
+    public val correctAnswers = MutableLiveData<String>().apply {
+        value = ""
+    }
 }

@@ -12,4 +12,6 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="your_web_client_id">461549182572-l58m4d4nvumpm0n5b3df5fpso4ol061j.apps.googleusercontent.com</string>
     <string name="menu_google_maps">Google Maps Mode</string>
+    <string name="fragment_results">Results</string>
+    <string name="menu_gm_results">GM Results</string>
 </resources>

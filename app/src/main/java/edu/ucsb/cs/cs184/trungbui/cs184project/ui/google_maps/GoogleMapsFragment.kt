@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -99,16 +100,12 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
                             setQuestion()
                         }
                         else -> {
-
-                            // START
-//                            val intent =
-//                                Intent(this@QuizQuestionsActivity, ResultActivity::class.java)
-//                            intent.putExtra(Constants.USER_NAME, mUserName)
-//                            intent.putExtra(Constants.CORRECT_ANSWERS, mCorrectAnswers)
-//                            intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList!!.size)
-//                            startActivity(intent)
-//                            finish()
-                            // END
+                            val GoogleMapsViewModel =
+                                ViewModelProvider(this).get(GoogleMapsViewModel::class.java)
+                            GoogleMapsViewModel.userName.value = "username"
+                            GoogleMapsViewModel.correctAnswers.value = mCorrectAnswers.toString()
+                            GoogleMapsViewModel.totalQuestions.value = mCurrentPosition.toString()
+                            findNavController().navigate(R.id.action_nav_google_maps_to_nav_gm_results)
                         }
                     }
                 } else {
