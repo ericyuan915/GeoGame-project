@@ -17,7 +17,6 @@ import edu.ucsb.cs.cs184.trungbui.cs184project.R
 import edu.ucsb.cs.cs184.trungbui.cs184project.User
 import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentLeaderboardBinding
 
-
 class LeaderboardFragment : Fragment() {
 
     private var _binding: FragmentLeaderboardBinding? = null
@@ -42,72 +41,42 @@ class LeaderboardFragment : Fragment() {
         // Fetching the leaderboard list view
         leaderboardListView = root.findViewById<ListView>(R.id.leaderboard_list_view)
 
-//        database = FirebaseDatabase.getInstance().getReference("users")
-//        val user = User("Eric", "Yuan", 10, "hi@gmail.com")
-//        database.child("1").setValue(user)
-//
         database = FirebaseDatabase.getInstance().getReference("users")
         database.keepSynced(true)
-        val eric = database.child("users/1")
-//        database.addChildEventListener(object : ChildEventListener {
-//            override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
-//                Log.d(TAG, "onChildAdded:" + dataSnapshot.key!!)
-//
-//                // A new comment has been added, add it to the displayed list
-////                val comment = dataSnapshot.getValue<Comment>()
-//
-//            }
-//        })
-        val userList: List<User> = List(20) { index ->
-            User("firstName${index + 1}", 20 - index, "email${index + 1}")
-        }
-//        val userlistTest: MutableList<User> = emptyList().toMutableList<User>()
-        val userlist1 = mutableListOf<User>()
-
-        database.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(data: DataSnapshot) {
-                // do something with data
-//                Log.v("fb", data.children.toString())
-//                var model = data.getValue(User::class.java)
-//                Log.v("fb", model.toString())
-//                userlist1.add(model as User)
-
-//                Log.v("hi", data.children.value.toString())
-//                for (snapshot in data){
-//                    var model = snapshot.getValue(User::class.java)
-//                    Log.v("fb", model.toString())
-//                    userlist1.add(model as User)
-//                }
-                val user = data.getValue()
-                Log.v("fb", data.key + ": " + data.value)
-                Log.v("hi", user.toString())
-//                Log.v("test", user?.name.toString())
-            }
-            override fun onCancelled(databaseError: DatabaseError) {
-                // report/log the error
-            }
-        })
-
-        // [TODO]: INSERT API CALL TO FETCH ALL USERS INFO
-//        val userList: List<User> = List(20) { index ->
-//            User("firstName${index + 1}", 20 - index, "email${index + 1}")
-//        }
-
-        // SORT THE USER FROM HIGHEST TO LOWEST SCORE
-        val sortedUserList = userList.sortedWith(Comparator { first: User, second: User ->
-            if (first.score != second.score) {
-                second.score - first.score
-            } else {
-                first.name!!.compareTo(second.name!!)
-            }
-        })
 
         // Adding header to the row
         val header = inflater.inflate(R.layout.leaderboard_header, leaderboardListView, false)
         leaderboardListView.addHeaderView(header)
 
-        // Displaying list view
-        leaderboardListView.adapter = LeaderboardAdapter(requireContext(), sortedUserList)
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(data: DataSnapshot) {
+                val userlist = mutableListOf<User>()
+
+                Log.d("LeaderboardFragment", "onDataChange method")
+                data.children.forEach{
+                    val score = Integer.parseInt(it.child("score").value.toString())
+                    val name: String = it.child("name").value.toString()
+                    val email: String = it.child("email").value.toString()
+                    userlist.add(User(name, score, email))
+                }
+
+                // SORT THE USER FROM HIGHEST TO LOWEST SCORE
+                val sortedUserList = userlist.sortedWith(Comparator { first: User, second: User ->
+                    if (first.score != second.score) {
+                        second.score - first.score
+                    } else {
+                        first.name!!.compareTo(second.name!!)
+                    }
+                })
+
+                // Displaying list view
+                leaderboardListView.adapter = LeaderboardAdapter(requireContext(), sortedUserList)
+
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // report/log the error
+            }
+        })
 
         return root
     }
