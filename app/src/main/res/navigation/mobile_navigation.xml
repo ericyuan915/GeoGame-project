@@ -42,4 +42,12 @@
             android:id="@+id/action_nav_results_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_mc_difficulty"
+        android:name="edu.ucsb.cs.cs184.trungbui.cs184project.ui.multichoice.DifficultyFragment"
+        android:label="DifficultyFragment" >
+        <action
+            android:id="@+id/action_difficultyFragment_to_nav_multichoice"
+            app:destination="@id/nav_multichoice" />
+    </fragment>
 </navigation>

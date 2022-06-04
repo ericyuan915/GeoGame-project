@@ -10,8 +10,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -44,17 +47,24 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
     private var QID:Int = 0
     private lateinit var currentQuestion:Question
 
+    lateinit var multichoiceViewModel: MultichoiceViewModel
+    var currentDifficulty:Char = '\u0000'
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        val MultichoiceViewModel =
-//            ViewModelProvider(this).get(MultichoiceViewModel::class.java)
+        multichoiceViewModel = ViewModelProvider(this).get(MultichoiceViewModel::class.java)
 
         _binding = FragmentMultichoiceBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        setFragmentResultListener(R.string.difficulty_multichoice_request_key.toString()) { _, bundle ->
+            currentDifficulty = bundle.getChar("difficulty")
+
+        }
 
         // Firebase authentication check
         val firebaseAuth = FirebaseAuth.getInstance()
@@ -118,25 +128,22 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
                             setQuestion()
                         }
                         else -> {
-//                            END OF GAME CONDITION
+                            // END OF GAME CONDITION
+                            Log.d("MultiChoiceFragment", "mCorrectAnswers = $mCorrectAnswers")
+                            Log.d("MultiChoiceFragment", "mCurrentPosition = $mCurrentPosition")
 
+                            // Saving current value to the view model
+                            multichoiceViewModel.correctAnswers.value = mCorrectAnswers.toString()
+                            multichoiceViewModel.totalQuestions.value = mCurrentPosition.toString()
 
-                            firebaseAuth = FirebaseAuth.getInstance()
-                            val firebaseUser = firebaseAuth.currentUser
+                            // Passing the correct result to the result fragment
+                            val bundle = bundleOf(
+                                Pair("correctAnswers", mCorrectAnswers),
+                                Pair("totalQuestions", mCurrentPosition)
+                            )
+                            setFragmentResult(R.string.multichoice_result_request_key.toString(), bundle)
 
-//                            val uuid = firebaseUser!!.uid
-                            val email = firebaseUser!!.email
-                            val name = firebaseUser!!.displayName
-                            database = FirebaseDatabase.getInstance().getReference("users")
-                            val user = User(name, mCorrectAnswers, email)
-                            database.child(name!!).setValue(user)
-
-                            val MultichoiceViewModel = ViewModelProvider(this).get(MultichoiceViewModel::class.java)
-
-                            MultichoiceViewModel.userName.value = name.toString()
-                            MultichoiceViewModel.correctAnswers.value = mCorrectAnswers.toString()
-                            MultichoiceViewModel.totalQuestions.value = mCurrentPosition.toString()
-
+                            // Navigating to the result fragment
                             findNavController().navigate(R.id.action_nav_multichoice_to_nav_results)
 
                         }//end of else

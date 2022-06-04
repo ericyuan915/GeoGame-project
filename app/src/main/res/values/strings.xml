@@ -13,4 +13,6 @@
     <string name="your_web_client_id">461549182572-l58m4d4nvumpm0n5b3df5fpso4ol061j.apps.googleusercontent.com</string>
     <string name="menu_google_maps">Google Maps Mode</string>
     <string name="menu_results">Results</string>
+    <string name="multichoice_result_request_key">multichoice_result_request_key</string>
+    <string name="difficulty_multichoice_request_key">difficulty_multichoice_request_key</string>
 </resources>
