@@ -25,6 +25,7 @@ class ResultsFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private var gameDifficulty:Char = 'e'
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,9 +53,15 @@ class ResultsFragment : Fragment() {
             setFragmentResultListener(R.string.multichoice_result_request_key.toString()) { _, bundle ->
                 val correctAnswers = bundle.getInt("correctAnswers")
                 val totalQuestions = bundle.getInt("totalQuestions")
+                gameDifficulty = bundle.getChar("gameDifficulty")
 
                 Log.d("ResultFragment", "totalQuestions = $totalQuestions")
                 Log.d("ResultFragment", "correctAnswers = $correctAnswers")
+
+                var scoreMultiplier = 1
+                if(gameDifficulty == 'e'){scoreMultiplier = 1}
+                if(gameDifficulty == 'm'){scoreMultiplier = 2}
+                if(gameDifficulty == 'h'){scoreMultiplier = 3}
 
                 // Displaying user information onto the screen
                 binding.tvName.text = name
@@ -66,7 +73,7 @@ class ResultsFragment : Fragment() {
                 resultsViewModel.displayLastResult.value = true
 
                 // Record user score to the database
-                val user = User(name, correctAnswers, email)
+                val user = User(name, (correctAnswers*scoreMultiplier), email)
                 database.child(name).setValue(user)
             }
 

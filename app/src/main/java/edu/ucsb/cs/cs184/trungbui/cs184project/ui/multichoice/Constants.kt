@@ -15,6 +15,14 @@ object Constants {
     fun getQuestions(): ArrayList<Question> {
         val questionsList = ArrayList<Question>()
 
+        // 0 - starting at 0 so we can access these as indeces in the questions list
+        val que0 = Question(
+            0,'e', "In what state is Mt. Rushmore?",
+            "Colorado", "South Dakota",
+            "Hawaii", "New York", 2
+        )
+        questionsList.add(que0)
+
         // 1
         val que1 = Question(
             1,'m', "What is the capital of Colorado?",

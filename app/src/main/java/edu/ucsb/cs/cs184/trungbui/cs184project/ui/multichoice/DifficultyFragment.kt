@@ -41,6 +41,11 @@ class DifficultyFragment : Fragment(), View.OnClickListener {
         _binding = FragmentDifficultyBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.tvText.text = "Select your difficulty:"
+        binding.tvOptionEasy.text = "Easy"
+        binding.tvOptionMedium.text = "Medium"
+        binding.tvOptionDifficult.text = "Difficult"
+
         binding.tvOptionEasy.setOnClickListener(this)
         binding.tvOptionMedium.setOnClickListener(this)
         binding.tvOptionDifficult.setOnClickListener(this)
@@ -67,7 +72,7 @@ class DifficultyFragment : Fragment(), View.OnClickListener {
             binding.tvOptionDifficult -> {
 
                 selectedOptionView(binding.tvOptionDifficult, 1)
-                selectedDifficulty = 'd'
+                selectedDifficulty = 'h'
             }
 
             binding.btnStart -> {

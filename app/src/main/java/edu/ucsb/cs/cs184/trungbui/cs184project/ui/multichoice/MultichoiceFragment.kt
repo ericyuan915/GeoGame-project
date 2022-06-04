@@ -48,7 +48,7 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
     private lateinit var currentQuestion:Question
 
     lateinit var multichoiceViewModel: MultichoiceViewModel
-    var currentDifficulty:Char = '\u0000'
+    var currentDifficulty:Char = 'e'
 
 
     override fun onCreateView(
@@ -63,6 +63,7 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
 
         setFragmentResultListener(R.string.difficulty_multichoice_request_key.toString()) { _, bundle ->
             currentDifficulty = bundle.getChar("difficulty")
+//            binding.tvQuestion.text  = currentDifficulty.toString()
 
         }
 
@@ -125,6 +126,11 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
 
                         mCurrentPosition <= 10 -> {
 
+                            setFragmentResultListener(R.string.difficulty_multichoice_request_key.toString()) { _, bundle ->
+                                currentDifficulty = bundle.getChar("difficulty")
+//            binding.tvQuestion.text  = currentDifficulty.toString()
+
+                            }
                             setQuestion()
                         }
                         else -> {
@@ -139,7 +145,8 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
                             // Passing the correct result to the result fragment
                             val bundle = bundleOf(
                                 Pair("correctAnswers", mCorrectAnswers),
-                                Pair("totalQuestions", mCurrentPosition)
+                                Pair("totalQuestions", mCurrentPosition),
+                                Pair("gameDifficulty", currentDifficulty)
                             )
                             setFragmentResult(R.string.multichoice_result_request_key.toString(), bundle)
 
@@ -178,13 +185,35 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
     private fun setQuestion() {
 
         //select a question we haven't seen before
-        QID = (1..mQuestionsList!!.size).shuffled().last()
-        while(doneQs.contains(QID)){
-            QID = (1..mQuestionsList!!.size).shuffled().last()
-        }
-        doneQs.add(QID)
 
-        currentQuestion = mQuestionsList!!.get(QID-1) // Getting the question from the list with the help of current position.
+        if(mCurrentPosition == 1){
+            QID = (0..(mQuestionsList!!.size-1)).shuffled().last()
+            currentQuestion = mQuestionsList!!.get(QID)
+            while((currentQuestion.difficulty != currentDifficulty)){
+                QID = (0..(mQuestionsList!!.size-1)).shuffled().last()
+                currentQuestion = mQuestionsList!!.get(QID)
+            }
+            doneQs.add(QID)
+            while((currentQuestion.difficulty != currentDifficulty)){
+                QID = (0..(mQuestionsList!!.size-1)).shuffled().last()
+                currentQuestion = mQuestionsList!!.get(QID)
+            }
+            doneQs.add(QID)
+        }
+        else {
+
+            QID = (0..(mQuestionsList!!.size - 1)).shuffled().last()
+            currentQuestion = mQuestionsList!!.get(QID)
+            while (doneQs.contains(QID) || (currentQuestion.difficulty != currentDifficulty)) {
+                QID = (0..(mQuestionsList!!.size - 1)).shuffled().last()
+                currentQuestion = mQuestionsList!!.get(QID)
+            }
+            doneQs.add(QID)
+        }
+
+
+
+
 
         defaultOptionsView()
 
@@ -197,7 +226,7 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
         binding.progressBar.progress = mCurrentPosition
         binding.tvProgress.text = "$mCurrentPosition" + "/" + binding.progressBar.getMax()
 
-        binding.tvQuestion.text = currentQuestion.question
+        binding.tvQuestion.text = currentQuestion.question + currentDifficulty.toString()
         binding.tvOptionOne.text =currentQuestion.optionOne
         binding.tvOptionTwo.text = currentQuestion.optionTwo
         binding.tvOptionThree.text = currentQuestion.optionThree

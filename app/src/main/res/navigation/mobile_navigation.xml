@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/nav_mc_difficulty"
         android:name="edu.ucsb.cs.cs184.trungbui.cs184project.ui.multichoice.DifficultyFragment"
-        android:label="DifficultyFragment" >
+        android:label="" >
         <action
             android:id="@+id/action_difficultyFragment_to_nav_multichoice"
             app:destination="@id/nav_multichoice" />
