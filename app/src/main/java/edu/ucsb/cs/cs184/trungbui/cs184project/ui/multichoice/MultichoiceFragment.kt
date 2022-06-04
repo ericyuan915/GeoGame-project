@@ -3,6 +3,7 @@ package edu.ucsb.cs.cs184.trungbui.cs184project.ui.multichoice
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import edu.ucsb.cs.cs184.trungbui.cs184project.R
+import edu.ucsb.cs.cs184.trungbui.cs184project.User
 import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentMultichoiceBinding
 
 
@@ -31,8 +35,10 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
 
     private var mSelectedOptionPosition: Int = 0
     private var mCorrectAnswers: Int = 0
+    private lateinit var firebaseAuth: FirebaseAuth
 
     private var mUserName: String? = null
+    private lateinit var database: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -113,7 +119,15 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
                             MultichoiceViewModel.correctAnswers.value = mCorrectAnswers.toString()
                             MultichoiceViewModel.totalQuestions.value = mCurrentPosition.toString()
                             findNavController().navigate(R.id.action_nav_multichoice_to_nav_results)
+                            firebaseAuth = FirebaseAuth.getInstance()
+                            val firebaseUser = firebaseAuth.currentUser
 
+//                            val uuid = firebaseUser!!.uid
+                            val email = firebaseUser!!.email
+                            val name = firebaseUser!!.displayName
+                            database = FirebaseDatabase.getInstance().getReference("users")
+                            val user = User(name, mCorrectAnswers, email)
+                            database.child(name!!).setValue(user)
 //                            val ldf = ResultsFragment()
 //                            val args = Bundle()
 //                            args.putString("correctAnswers", mCorrectAnswers.toString())
