@@ -195,6 +195,141 @@ object Constants {
 
         questionsList.add(que20)
 
+        // 21
+        val que21 = Question(
+            21, 'm',"Which of these states is the least populated?",
+            "Arizona", "Wyoming",
+            "Deleware", "Rhode Island", 2
+        )
+
+        questionsList.add(que21)
+
+        // 22
+        val que22 = Question(
+            22, 'm',"What of these states is NOT apart of the Midwest region?",
+            "North Dakota", "Kansas",
+            "Arkansas", "Ohio", 3
+        )
+
+        questionsList.add(que22)
+
+        // 23
+        val que23 = Question(
+            23, 'm',"What is the state flower of New York?",
+            "Mayflower", "Rose",
+            "Violet", "Camellia", 2
+        )
+
+        questionsList.add(que23)
+
+        // 24
+        val que24 = Question(
+            24, 'h',"What is the state flower of Nevada?",
+            "Sagebrush", "Goldenrod",
+            "Yucca Flower", "Iris", 1
+        )
+
+        questionsList.add(que24)
+
+        // 25
+        val que25 = Question(
+            25, 'h',"What is the state flower of New Jersey?",
+            "Peach Blossom", "Magnolia",
+            "Rose", "Violet", 4
+        )
+
+        questionsList.add(que25)
+
+        // 26
+        val que26 = Question(
+            26, 'e',"In what state is Stanford University?",
+            "Texas", "Washington",
+            "New York", "California", 4
+        )
+
+        questionsList.add(que26)
+
+        // 27
+        val que27 = Question(
+            27, 'm',"In what state is Brown University?",
+            "Massachusetts", "Rhode Island",
+            "New York", "Ohio", 2
+        )
+
+        questionsList.add(que27)
+
+        // 28
+        val que28 = Question(
+            28, 'h',"How many electoral votes does Texas have?",
+            "35", "42",
+            "38", "33", 3
+        )
+
+        questionsList.add(que28)
+
+        // 29
+        val que29 = Question(
+            29, 'e',"Which of these states has the most electoral votes?",
+            "New York", "Texas",
+            "Florida", "California", 4
+        )
+
+        questionsList.add(que29)
+
+        // 30
+        val que30 = Question(
+            30, 'm',"Which state has the largest production of maple syrup?",
+            "Virginia", "North Carolina",
+            "Ohio", "Vermont", 4
+        )
+
+        questionsList.add(que30)
+
+        // 31
+        val que31 = Question(
+            31, 'm',"What was the first state to ratify the US Constitution?",
+            "Massachusetts", "Delaware",
+            "Georgia", "Pennsylvania", 2
+        )
+
+        questionsList.add(que31)
+
+        // 32
+        val que32 = Question(
+            32, 'e',"What state is known for lobster?",
+            "Michigan", "New York",
+            "California", "Maine", 4
+        )
+
+        questionsList.add(que32)
+
+        // 33
+        val que33 = Question(
+            33, 'm',"Salem is the capital of which state?",
+            "Washington", "Wisconsin",
+            "Oregon", "Illinois", 3
+        )
+
+        questionsList.add(que33)
+
+        // 34
+        val que34 = Question(
+            34, 'm',"Which state does NOT border a body of water?",
+            "Louisiana", "Tennessee",
+            "Michigan", "Arizona", 2
+        )
+
+        questionsList.add(que34)
+
+        // 35
+        val que35 = Question(
+            35, 'm',"Which of these states borders Kentucky?",
+            "Indiana", "Georgia",
+            "Iowa", "South Carolina", 1
+        )
+
+        questionsList.add(que35)
+
 
 
         return questionsList
