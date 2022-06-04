@@ -226,7 +226,7 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
         binding.progressBar.progress = mCurrentPosition
         binding.tvProgress.text = "$mCurrentPosition" + "/" + binding.progressBar.getMax()
 
-        binding.tvQuestion.text = currentQuestion.question + currentDifficulty.toString()
+        binding.tvQuestion.text = currentQuestion.question
         binding.tvOptionOne.text =currentQuestion.optionOne
         binding.tvOptionTwo.text = currentQuestion.optionTwo
         binding.tvOptionThree.text = currentQuestion.optionThree
