@@ -148,7 +148,10 @@ class HomeFragment : Fragment() {
                 val user = User(name, 0, email)
                 database.child(name!!).setValue(user)
 
-                val eric = database.child("users/1")
+                database = FirebaseDatabase.getInstance().getReference("users")
+                database.keepSynced(true)
+
+
 
                 // Check if the user is new or existing
                 if (authResult.additionalUserInfo!!.isNewUser) {
