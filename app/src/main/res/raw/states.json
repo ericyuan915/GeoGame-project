@@ -1,0 +1,452 @@
+[
+    {
+    "name": "Alabama",
+    "abbreviation": "AL",
+    "capital": "Montgomery",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Yellowhammer",
+    "flower": "Camellia"
+    },
+    {
+    "name": "Alaska",
+    "abbreviation": "AK",
+    "capital": "Juneau",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Willow ptarmigan",
+    "flower": "Forget-me-not"
+    },
+    {
+    "name": "Arizona",
+    "abbreviation": "AZ",
+    "capital": "Phoenix",
+    "population": 7640796,
+    "pop_rank": 14,
+    "bird": "Cactus wren",
+    "flower": "Saguaro cactus blossom"
+    },
+    {
+    "name": "Arkansas",
+    "abbreviation": "AR",
+    "capital": "Little Rock",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Northern mockingbird",
+    "flower": "Apple blossom"
+    },
+    {
+    "name": "California",
+    "abbreviation": "CA",
+    "capital": "Sacramento",
+    "population": 39664128,
+    "pop_rank": 1,
+    "bird": "California quail",
+    "flower": "California poppy"
+    },
+    {
+    "name": "Colorado",
+    "abbreviation": "CO",
+    "capital": "Denver",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Lark bunting",
+    "flower": "Rocky Mountain columbine"
+    },
+    {
+    "name": "Connecticut",
+    "abbreviation": "CT",
+    "capital": "Hartford",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "American robin",
+    "flower": "Mountain laurel"
+    },
+    {
+    "name": "Delaware",
+    "abbreviation": "DE",
+    "capital": "Dover",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Delaware Blue Hen",
+    "flower": "Peach blossom"
+    },
+    {
+    "name": "Florida",
+    "abbreviation": "FL",
+    "capital": "Tallahassee",
+    "population": 22177997,
+    "pop_rank": 3,
+    "bird": "Northern mockingbird",
+    "flower": "Orange blossom"
+    },
+    {
+    "name": "Georgia",
+    "abbreviation": "GA",
+    "capital": "Atlanta",
+    "population": 10936299,
+    "pop_rank": 8,
+    "bird": "Brown thrasher",
+    "flower": "Cherokee rose"
+    },
+    {
+    "name": "Hawaii",
+    "abbreviation": "HI",
+    "capital": "Honolulu",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Hawaiian goose",
+    "flower": "Hawaiian hibiscus"
+    },
+    {
+    "name": "Idaho",
+    "abbreviation": "ID",
+    "capital": "Boise",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Mountain bluebird",
+    "flower": "Syringa, mock orange"
+    },
+    {
+    "name": "Illinois",
+    "abbreviation": "IL",
+    "capital": "Springfield",
+    "population": 12518071,
+    "pop_rank": 6,
+    "bird": "Northern cardinal",
+    "flower": "Violet"
+    },
+    {
+    "name": "Indiana",
+    "abbreviation": "IN",
+    "capital": "Indianapolis",
+    "population": 6842385,
+    "pop_rank": 17,
+    "bird": "Northern cardinal",
+    "flower": "Peony"
+    },
+    {
+    "name": "Iowa",
+    "abbreviation": "IA",
+    "capital": "Des Moines",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Eastern goldfinch",
+    "flower": "Wild rose"
+    },
+    {
+    "name": "Kansas",
+    "abbreviation": "KS",
+    "capital": "Topeka",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Western meadowlark",
+    "flower": "Sunflower"
+    },
+    {
+    "name": "Kentucky",
+    "abbreviation": "KY",
+    "capital": "Frankfort",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Northern cardinal",
+    "flower": "Goldenrod"
+    },
+    {
+    "name": "Louisiana",
+    "abbreviation": "LA",
+    "capital": "Baton Rouge",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Brown pelican",
+    "flower": "Magnolia"
+    },
+    {
+    "name": "Maine",
+    "abbreviation": "ME",
+    "capital": "Augusta",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Chickadee",
+    "flower": "White pine cone and tassel"
+    },
+    {
+    "name": "Maryland",
+    "abbreviation": "MD",
+    "capital": "Annapolis",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Baltimore oriole",
+    "flower": "Black-eyed susan"
+    },
+    {
+    "name": "Massachusetts",
+    "abbreviation": "MA",
+    "capital": "Boston",
+    "population": 6922107,
+    "pop_rank": 16,
+    "bird": "Black-capped chickadee",
+    "flower": "Mayflower"
+    },
+    {
+    "name": "Michigan",
+    "abbreviation": "MI",
+    "capital": "Lansing",
+    "population": 9995212,
+    "pop_rank": 10,
+    "bird": "American robin",
+    "flower": "Apple blossom"
+    },
+    {
+    "name": "Minnesota",
+    "abbreviation": "MN",
+    "capital": "St. Paul",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Common loon",
+    "flower": "Pink and white lady's slipper"
+    },
+    {
+    "name": "Mississippi",
+    "abbreviation": "MS",
+    "capital": "Jackson",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Northern mockingbird",
+    "flower": "Magnolia"
+    },
+    {
+    "name": "Missouri",
+    "abbreviation": "MO",
+    "capital": "Jefferson City",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Eastern bluebird",
+    "flower": "Hawthorn"
+    },
+    {
+    "name": "Montana",
+    "abbreviation": "MT",
+    "capital": "Helena",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Western meadowlark",
+    "flower": "Bitterroot"
+    },
+    {
+    "name": "Nebraska",
+    "abbreviation": "NE",
+    "capital": "Lincoln",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Western meadowlark",
+    "flower": "Goldenrod"
+    },
+    {
+    "name": "Nevada",
+    "abbreviation": "NV",
+    "capital": "Carson City",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Mountain bluebird",
+    "flower": "Sagebrush"
+    },
+    {
+    "name": "New Hampshire",
+    "abbreviation": "NH",
+    "capital": "Concord",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Purple finch",
+    "flower": "Purple lilac"
+    },
+    {
+    "name": "New Jersey",
+    "abbreviation": "NJ",
+    "capital": "Trenton",
+    "population": 8870685,
+    "pop_rank": 11,
+    "bird": "Eastern goldfinch",
+    "flower": "Violet"
+    },
+    {
+    "name": "New Mexico",
+    "abbreviation": "NM",
+    "capital": "Santa Fe",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Greater roadrunner",
+    "flower": "Yucca flower"
+    },
+    {
+    "name": "New York",
+    "abbreviation": "NY",
+    "capital": "Albany",
+    "population": 19223191,
+    "pop_rank": 4,
+    "bird": "Eastern bluebird",
+    "flower": "Rose"
+    },
+    {
+    "name": "North Carolina",
+    "abbreviation": "NC",
+    "capital": "Raleigh",
+    "population": 10807491,
+    "pop_rank": 9,
+    "bird": "Northern cardinal",
+    "flower": "Flowering dogwood"
+    },
+    {
+    "name": "North Dakota",
+    "abbreviation": "ND",
+    "capital": "Bismarck",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Western meadowlark",
+    "flower": "Wild prairie rose"
+    },
+    {
+    "name": "Ohio",
+    "abbreviation": "OH",
+    "capital": "Columbus",
+    "population": 11727377,
+    "pop_rank": 7,
+    "bird": "Northern cardinal",
+    "flower": "Scarlet carnation"
+    },
+    {
+    "name": "Oklahoma",
+    "abbreviation": "OK",
+    "capital": "Oklahoma City",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Scissor-tailed flycatcher",
+    "flower": "Oklahoma rose"
+    },
+    {
+    "name": "Oregon",
+    "abbreviation": "OR",
+    "capital": "Salem",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Western meadowlark",
+    "flower": "Oregon grape"
+    },
+    {
+    "name": "Pennsylvania",
+    "abbreviation": "PA",
+    "capital": "Harrisburg",
+    "population": 12805190,
+    "pop_rank": 5,
+    "bird": "Ruffed Grouse",
+    "flower": "Mountain laurel"
+    },
+    {
+    "name": "Rhode Island",
+    "abbreviation": "RI",
+    "capital": "Providence",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Rhode Island Red",
+    "flower": "Violet"
+    },
+    {
+    "name": "South Carolina",
+    "abbreviation": "SC",
+    "capital": "Columbia",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Carolina wren",
+    "flower": "Yellow jessamine"
+    },
+    {
+    "name": "South Dakota",
+    "abbreviation": "SD",
+    "capital": "Pierre",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Ring-necked pheasant",
+    "flower": "Pasque flower"
+    },
+    {
+    "name": "Tennessee",
+    "abbreviation": "TN",
+    "capital": "Nashville",
+    "population": 7001803,
+    "pop_rank": 15,
+    "bird": "Northern mockingbird",
+    "flower": "Iris"
+    },
+    {
+    "name": "Texas",
+    "abbreviation": "TX",
+    "capital": "Austin",
+    "population": 30097526,
+    "pop_rank": 2,
+    "bird": "Northern mockingbird",
+    "flower": "Bluebonnet sp."
+    },
+    {
+    "name": "Utah",
+    "abbreviation": "UT",
+    "capital": "Salt Lake City",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "California gull",
+    "flower": "Sego lily"
+    },
+    {
+    "name": "Vermont",
+    "abbreviation": "VT",
+    "capital": "Montpelier",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Hermit thrush",
+    "flower": "Red clover"
+    },
+    {
+    "name": "Virginia",
+    "abbreviation": "VA",
+    "capital": "Richmond",
+    "population": 8638218,
+    "pop_rank": 12,
+    "bird": "Northern cardinal",
+    "flower": "American dogwood"
+    },
+    {
+    "name": "Washington",
+    "abbreviation": "WA",
+    "capital": "Olympia",
+    "population": 7887965,
+    "pop_rank": 13,
+    "bird": "Willow goldfinch",
+    "flower": "Coast rhododendron"
+    },
+    {
+    "name": "West Virginia",
+    "abbreviation": "WV",
+    "capital": "Charleston",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Northern cardinal",
+    "flower": "Rhododendron"
+    },
+    {
+    "name": "Wisconsin",
+    "abbreviation": "WI",
+    "capital": "Madison",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "American robin",
+    "flower": "Wood violet"
+    },
+    {
+    "name": "Wyoming",
+    "abbreviation": "WY",
+    "capital": "Cheyenne",
+    "population": 1,
+    "pop_rank": 1,
+    "bird": "Western meadowlark",
+    "flower": "Indian paintbrush"
+    }
+    ]
