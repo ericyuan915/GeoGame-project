@@ -32,8 +32,6 @@ class LeaderboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val galleryViewModel =
-            ViewModelProvider(this).get(LeaderboardViewModel::class.java)
 
         _binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
