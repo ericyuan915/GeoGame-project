@@ -21,6 +21,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.util.Log
 import androidx.core.content.ContextCompat
+import com.google.firebase.database.FirebaseDatabase
 
 class GMResultsFragment : Fragment() {
 
@@ -42,41 +43,66 @@ class GMResultsFragment : Fragment() {
         _binding = FragmentGmResultsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        setFragmentResultListener(R.string.googlemaps_result_request_key.toString()) { _, bundle ->
-            val correctAnswers = bundle.getInt("correctAnswers")
-            val totalQuestions = bundle.getInt("totalQuestions")
-            gameDifficulty = bundle.getChar("gameDifficulty")
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val firebaseUser: FirebaseUser? = firebaseAuth.currentUser
 
-            Log.d("ResultFragment", "totalQuestions = $totalQuestions")
-            Log.d("ResultFragment", "correctAnswers = $correctAnswers")
+        if (firebaseUser == null) {
+            findNavController().navigate(R.id.nav_home)
+            Toast.makeText(context, "User has not logged in", Toast.LENGTH_SHORT).show()
+        } else {
+            val email = firebaseUser!!.email
+            val name = firebaseUser!!.displayName!!
+            val database = FirebaseDatabase.getInstance().getReference("users")
 
-            var scoreMultiplier = 1
-            if(gameDifficulty == 'e'){scoreMultiplier = 1}
-            if(gameDifficulty == 'm'){scoreMultiplier = 2}
-            if(gameDifficulty == 'h'){scoreMultiplier = 3}
+            // Retrieving the result from the Google map fragment
+            setFragmentResultListener(R.string.googlemaps_result_request_key.toString()) { _, bundle ->
+                val correctAnswers = bundle.getInt("correctAnswers")
+                val totalQuestions = bundle.getInt("totalQuestions")
+                gameDifficulty = bundle.getChar("gameDifficulty")
+
+                Log.d("GMResultsFragment", "totalQuestions = $totalQuestions")
+                Log.d("GMResultsFragment", "correctAnswers = $correctAnswers")
+
+                var scoreMultiplier = 1
+                if(gameDifficulty == 'e'){scoreMultiplier = 1}
+                if(gameDifficulty == 'm'){scoreMultiplier = 2}
+                if(gameDifficulty == 'h'){scoreMultiplier = 3}
+
+                // Displaying user information onto the screen
+                binding.tvName.text = name
+                binding.tvScore.text = "Your Score is $correctAnswers out of $totalQuestions"
+
+                gmResultsViewModel.userName.value = name
+                gmResultsViewModel.resultText.value =  "Your Score is $correctAnswers out of $totalQuestions"
+                gmResultsViewModel.displayLastResult.value = true
+
+                // Retrieve the user current multichoiceScore to persist the data
+                database.child(name).get().addOnSuccessListener {
+                    val multichoiceScore = Integer.parseInt(it.child("multichoiceScore").value.toString())
+                    val user = User(name, (correctAnswers*scoreMultiplier), email, multichoiceScore)
+                    // Record user score to the database
+                    database.child(name).setValue(user)
+                }.addOnFailureListener{
+                    Log.e("GMResultsFragment", "Error getting data", it)
+                }
+
+            }
+
+            Log.d("GMResultsFragment", "userName = ${gmResultsViewModel.userName.value}")
+            Log.d("GMResultsFragment", "text = ${gmResultsViewModel.resultText.value}")
 
             // Displaying user information onto the screen
-            binding.tvName.text = "name"
-            binding.tvScore.text = "Your Score is $correctAnswers out of $totalQuestions"
+            if (gmResultsViewModel.displayLastResult.value!!) {
+                binding.tvName.text = gmResultsViewModel.userName.value
+                binding.tvScore.text = gmResultsViewModel.resultText.value
+            }
 
-            gmResultsViewModel.userName.value = "name"
-            gmResultsViewModel.resultText.value =
-                "Your Score is $correctAnswers out of $totalQuestions"
-            gmResultsViewModel.displayLastResult.value = true
-
-        }
-
-        Log.d("ResultFragment", "userName = ${gmResultsViewModel.userName.value}")
-        Log.d("ResultFragment", "text = ${gmResultsViewModel.resultText.value}")
-
-        // Displaying user information onto the screen
-        if (gmResultsViewModel.displayLastResult.value!!) {
-            binding.tvName.text = gmResultsViewModel.userName.value
-            binding.tvScore.text = gmResultsViewModel.resultText.value
+            binding.startOverBtnGM.setOnClickListener() {
+                findNavController().navigate(R.id.nav_gm_difficulty)
+            }
         }
 
         return root
-
     }
 
     override fun onDestroyView() {

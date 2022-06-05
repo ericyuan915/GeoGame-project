@@ -55,6 +55,13 @@
         android:textSize="20sp"
         tools:text="Your Score is 9 out of 10" />
 
+    <Button
+        android:id="@+id/startOverBtnGM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Start Over" />
+
     <!--    <Button-->
     <!--        android:id="@+id/btn_finish"-->
     <!--        android:layout_width="match_parent"-->
