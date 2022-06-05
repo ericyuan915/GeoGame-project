@@ -4,6 +4,7 @@ class User(
 //    val firstName: String,
 //    val lastName: String,
     val name: String?,
-    var score: Int,
-    val email: String?
+    var mapScore: Int,
+    val email: String?,
+    var multichoiceScore: Int
 ) { }

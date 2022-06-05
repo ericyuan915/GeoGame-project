@@ -68,13 +68,19 @@ class ResultsFragment : Fragment() {
                 binding.tvScore.text = "Your Score is $correctAnswers out of $totalQuestions"
 
                 resultsViewModel.userName.value = name
-                resultsViewModel.resultText.value =
-                    "Your Score is $correctAnswers out of $totalQuestions"
+                resultsViewModel.resultText.value =  "Your Score is $correctAnswers out of $totalQuestions"
                 resultsViewModel.displayLastResult.value = true
 
-                // Record user score to the database
-                val user = User(name, (correctAnswers*scoreMultiplier), email)
-                database.child(name).setValue(user)
+                // Retrieve the user current mapScore to persist the data
+                database.child(name).get().addOnSuccessListener {
+                    val mapScore = Integer.parseInt(it.child("mapScore").value.toString())
+                    val user = User(name, mapScore, email, (correctAnswers*scoreMultiplier))
+                    // Record user score to the database
+                    database.child(name).setValue(user)
+                }.addOnFailureListener{
+                    Log.e("ResultFragment", "Error getting data", it)
+                }
+
             }
 
             Log.d("ResultFragment", "userName = ${resultsViewModel.userName.value}")
@@ -84,6 +90,10 @@ class ResultsFragment : Fragment() {
             if (resultsViewModel.displayLastResult.value!!) {
                 binding.tvName.text = resultsViewModel.userName.value
                 binding.tvScore.text = resultsViewModel.resultText.value
+            }
+
+            binding.startOverBtn.setOnClickListener() {
+                findNavController().navigate(R.id.nav_mc_difficulty)
             }
         }
 
