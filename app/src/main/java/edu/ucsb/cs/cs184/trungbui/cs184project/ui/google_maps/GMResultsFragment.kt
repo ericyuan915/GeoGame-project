@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import edu.ucsb.cs.cs184.trungbui.cs184project.R
+import edu.ucsb.cs.cs184.trungbui.cs184project.User
 import edu.ucsb.cs.cs184.trungbui.cs184project.ui.home.HomeViewModel
 import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentGmResultsBinding
 import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentGoogleMapsBinding
@@ -28,6 +29,7 @@ class GMResultsFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private var gameDifficulty:Char = 'e'
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,9 +45,16 @@ class GMResultsFragment : Fragment() {
         setFragmentResultListener(R.string.googlemaps_result_request_key.toString()) { _, bundle ->
             val correctAnswers = bundle.getInt("correctAnswers")
             val totalQuestions = bundle.getInt("totalQuestions")
+            gameDifficulty = bundle.getChar("gameDifficulty")
 
             Log.d("ResultFragment", "totalQuestions = $totalQuestions")
             Log.d("ResultFragment", "correctAnswers = $correctAnswers")
+
+            var scoreMultiplier = 1
+            if(gameDifficulty == 'e'){scoreMultiplier = 1}
+            if(gameDifficulty == 'm'){scoreMultiplier = 2}
+            if(gameDifficulty == 'h'){scoreMultiplier = 3}
+
             // Displaying user information onto the screen
             binding.tvName.text = "name"
             binding.tvScore.text = "Your Score is $correctAnswers out of $totalQuestions"

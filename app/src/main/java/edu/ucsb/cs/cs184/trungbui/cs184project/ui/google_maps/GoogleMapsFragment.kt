@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -45,6 +46,8 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
 
     private lateinit var mMap: GoogleMap
     lateinit var googlemapsViewModel: GoogleMapsViewModel
+    var currentDifficulty:Char = 'e'
+    var zoomMultiplier:Double = 1.0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,6 +62,11 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
         // END
 
         googlemapsViewModel = ViewModelProvider(this).get(GoogleMapsViewModel::class.java)
+
+        setFragmentResultListener(R.string.difficulty_multichoice_request_key.toString()) { _, bundle ->
+            currentDifficulty = bundle.getChar("difficulty")
+
+        }
 
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -116,7 +124,8 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
                             // Passing the correct result to the result fragment
                             val bundle = bundleOf(
                                 Pair("correctAnswers", mCorrectAnswers),
-                                Pair("totalQuestions", mCurrentPosition-1)
+                                Pair("totalQuestions", mCurrentPosition-1),
+                                Pair("gameDifficulty", currentDifficulty)
                             )
                             setFragmentResult(R.string.googlemaps_result_request_key.toString(), bundle)
 
@@ -154,6 +163,10 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
      */
     private fun setQuestion() {
 
+        if(currentDifficulty == 'e'){zoomMultiplier = 0.8}
+        if(currentDifficulty == 'm'){zoomMultiplier = 1.1}
+        if(currentDifficulty == 'h'){zoomMultiplier = 1.3}
+
         val question =
             mQuestionsList!!.get(mCurrentPosition - 1) // Getting the question from the list with the help of current position.
 
@@ -174,8 +187,10 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
 
         mMarker1 = mMap.addMarker(MarkerOptions()
             .position(new_coord)
-            .title("Point in the US"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new_coord,5.0f))
+            .title("Point in the US" + zoomMultiplier.toString()))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new_coord,
+            (5.0f * zoomMultiplier).toFloat()
+        ))
 
         binding.tvOptionOne.text = question.optionOne
         binding.tvOptionTwo.text = question.optionTwo
@@ -288,6 +303,11 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
         }
 
         mQuestionsList = Constants.getQuestions()
+
+        setFragmentResultListener(R.string.difficulty_multichoice_request_key.toString()) { _, bundle ->
+            currentDifficulty = bundle.getChar("difficulty")
+
+        }
 
         setQuestion()
         binding.tvOptionOne.setOnClickListener(this)
