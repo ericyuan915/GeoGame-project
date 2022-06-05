@@ -12,6 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -42,6 +44,7 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
     private var mMarker1: Marker? = null
 
     private lateinit var mMap: GoogleMap
+    lateinit var googlemapsViewModel: GoogleMapsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,6 +57,8 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
 
         mUserName = "username"
         // END
+
+        googlemapsViewModel = ViewModelProvider(this).get(GoogleMapsViewModel::class.java)
 
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -100,11 +105,22 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
                             setQuestion()
                         }
                         else -> {
-                            val GoogleMapsViewModel =
-                                ViewModelProvider(this).get(GoogleMapsViewModel::class.java)
-                            GoogleMapsViewModel.userName.value = "username"
-                            GoogleMapsViewModel.correctAnswers.value = mCorrectAnswers.toString()
-                            GoogleMapsViewModel.totalQuestions.value = mCurrentPosition.toString()
+                            // END OF GAME CONDITION
+                            // Log.d("MultiChoiceFragment", "mCorrectAnswers = $mCorrectAnswers")
+                            // Log.d("MultiChoiceFragment", "mCurrentPosition = $mCurrentPosition")
+
+                            // Saving current value to the view model
+                            googlemapsViewModel.correctAnswers.value = mCorrectAnswers.toString()
+                            googlemapsViewModel.totalQuestions.value = mCurrentPosition.toString()
+
+                            // Passing the correct result to the result fragment
+                            val bundle = bundleOf(
+                                Pair("correctAnswers", mCorrectAnswers),
+                                Pair("totalQuestions", mCurrentPosition-1)
+                            )
+                            setFragmentResult(R.string.googlemaps_result_request_key.toString(), bundle)
+
+                            // Navigating to the result fragment
                             findNavController().navigate(R.id.action_nav_google_maps_to_nav_gm_results)
                         }
                     }

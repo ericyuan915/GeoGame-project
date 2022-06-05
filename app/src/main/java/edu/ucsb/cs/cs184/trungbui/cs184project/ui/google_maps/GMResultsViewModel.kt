@@ -6,8 +6,13 @@ import androidx.lifecycle.ViewModel
 
 class GMResultsViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is GM Results Fragment"
+    val userName = MutableLiveData<String>().apply {
+        value = "username"
     }
-    val text: LiveData<String> = _text
+    val resultText = MutableLiveData<String>().apply {
+        value = ""
+    }
+    val displayLastResult = MutableLiveData<Boolean>().apply {
+        value = false
+    }
 }

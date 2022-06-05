@@ -14,4 +14,5 @@
     <string name="menu_google_maps">Google Maps Mode</string>
     <string name="fragment_results">Results</string>
     <string name="menu_gm_results">GM Results</string>
+    <string name="googlemaps_result_request_key">googlemaps_result_request_key</string>
 </resources>
