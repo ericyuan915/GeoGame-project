@@ -18,8 +18,11 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import edu.ucsb.cs.cs184.trungbui.cs184project.R
+import edu.ucsb.cs.cs184.trungbui.cs184project.User
 import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.ActivityMainBinding
 import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentHomeBinding
 
@@ -33,6 +36,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var database: DatabaseReference
+
 
     // constants
     private companion object {
@@ -133,21 +138,30 @@ class HomeFragment : Fragment() {
                 // Get user information
                 val uuid = firebaseUser!!.uid
                 val email = firebaseUser!!.email
+                val name = firebaseUser!!.displayName
 
                 Log.d(TAG, "firebaseAuthWithGoogleAccount - uid: ${uuid}")
                 Log.d(TAG, "firebaseAuthWithGoogleAccount - email: ${email}")
+                Log.d(TAG, "firebaseAuthWithGoogleAccount - name: ${name}")
 
                 // Check if the user is new or existing
                 if (authResult.additionalUserInfo!!.isNewUser) {
                     // User is new - account created
                     Log.d(TAG, "firebaseAuthWithGoogleAccout: Account created: ${email}")
+
+                    database = FirebaseDatabase.getInstance().getReference("users")
+                    val user = User(name, 0, email, 0)
+                    database.child(name!!).setValue(user)
+
                 } else {
                     // Exisiting user
                     Log.d(TAG, "firebaseAuthWithGoogleAccount - existing user")
                 }
+
+                database = FirebaseDatabase.getInstance().getReference("users")
+                database.keepSynced(true)
+
                 checkUser()
-
-
             }
             .addOnFailureListener { e ->
                 // Login failed

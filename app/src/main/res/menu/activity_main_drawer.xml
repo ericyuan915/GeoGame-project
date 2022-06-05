@@ -9,13 +9,17 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_maps_leaderboard"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/menu_maps_leaderboard" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_multichoice_leaderboard"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_multichoice_leaderboard" />
+        <item
+            android:id="@+id/nav_mc_difficulty"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_multichoice" />
         <item
             android:id="@+id/nav_google_maps"
             android:icon="@drawable/ic_menu_slideshow"
