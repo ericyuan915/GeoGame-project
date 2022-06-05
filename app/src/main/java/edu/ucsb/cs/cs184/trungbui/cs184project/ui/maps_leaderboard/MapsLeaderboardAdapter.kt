@@ -1,4 +1,4 @@
-package edu.ucsb.cs.cs184.trungbui.cs184project.ui.leaderboard
+package edu.ucsb.cs.cs184.trungbui.cs184project.ui.maps_leaderboard
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,9 +8,8 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import edu.ucsb.cs.cs184.trungbui.cs184project.R
 import edu.ucsb.cs.cs184.trungbui.cs184project.User
-import org.w3c.dom.Text
 
-class LeaderboardAdapter(
+class MapsLeaderboardAdapter(
     private val context: Context,
     private val dataSource: List<User>
 ) : BaseAdapter() {
@@ -40,7 +39,7 @@ class LeaderboardAdapter(
         val userFirstName = rowView.findViewById<TextView>(R.id.name)
         userFirstName.text = dataSource[position].name
         val userScore = rowView.findViewById<TextView>(R.id.score)
-        userScore.text = dataSource[position].score.toString()
+        userScore.text = dataSource[position].mapScore.toString()
 
         // User ranking info
         val rankingInfo = rowView.findViewById<TextView>(R.id.ranking)

@@ -10,14 +10,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import edu.ucsb.cs.cs184.trungbui.cs184project.R
+import edu.ucsb.cs.cs184.trungbui.cs184project.User
 import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentMultichoiceBinding
 
 
@@ -33,26 +38,41 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
 
     private var mSelectedOptionPosition: Int = 0
     private var mCorrectAnswers: Int = 0
+    private lateinit var firebaseAuth: FirebaseAuth
 
     private var mUserName: String? = null
+    private lateinit var database: DatabaseReference
+
+    private val doneQs = mutableListOf<Int>()
+    private var QID:Int = 0
+    private lateinit var currentQuestion:Question
+
+    lateinit var multichoiceViewModel: MultichoiceViewModel
+    var currentDifficulty:Char = 'e'
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val MultichoiceViewModel =
-            ViewModelProvider(this).get(MultichoiceViewModel::class.java)
+        multichoiceViewModel = ViewModelProvider(this).get(MultichoiceViewModel::class.java)
 
         _binding = FragmentMultichoiceBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        setFragmentResultListener(R.string.difficulty_multichoice_request_key.toString()) { _, bundle ->
+            currentDifficulty = bundle.getChar("difficulty")
+//            binding.tvQuestion.text  = currentDifficulty.toString()
+
+        }
 
         // Firebase authentication check
         val firebaseAuth = FirebaseAuth.getInstance()
         val firebaseUser: FirebaseUser? = firebaseAuth.currentUser
         if (firebaseUser == null) {
             findNavController().navigate(R.id.nav_home)
-            Toast.makeText(context, "User have not logged in", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "User has not logged in", Toast.LENGTH_SHORT).show()
         } else {
 
             mUserName = firebaseUser!!.displayName
@@ -104,31 +124,48 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
 
                     when {
 
-                        mCurrentPosition <= mQuestionsList!!.size -> {
+                        mCurrentPosition <= 10 -> {
 
+                            setFragmentResultListener(R.string.difficulty_multichoice_request_key.toString()) { _, bundle ->
+                                currentDifficulty = bundle.getChar("difficulty")
+//            binding.tvQuestion.text  = currentDifficulty.toString()
+
+                            }
                             setQuestion()
                         }
                         else -> {
-                            val MultichoiceViewModel =
-                                ViewModelProvider(this).get(MultichoiceViewModel::class.java)
-                            MultichoiceViewModel.userName.value = "username"
-                            MultichoiceViewModel.correctAnswers.value = mCorrectAnswers.toString()
-                            MultichoiceViewModel.totalQuestions.value = mCurrentPosition.toString()
+                            // END OF GAME CONDITION
+                            Log.d("MultiChoiceFragment", "mCorrectAnswers = $mCorrectAnswers")
+                            Log.d("MultiChoiceFragment", "mCurrentPosition = $mCurrentPosition")
+
+                            // Saving current value to the view model
+                            multichoiceViewModel.correctAnswers.value = mCorrectAnswers.toString()
+                            multichoiceViewModel.totalQuestions.value = mCurrentPosition.toString()
+
+                            // Passing the correct result to the result fragment
+                            val bundle = bundleOf(
+                                Pair("correctAnswers", mCorrectAnswers),
+                                Pair("totalQuestions", mCurrentPosition),
+                                Pair("gameDifficulty", currentDifficulty)
+                            )
+                            setFragmentResult(R.string.multichoice_result_request_key.toString(), bundle)
+
+                            // Navigating to the result fragment
                             findNavController().navigate(R.id.action_nav_multichoice_to_nav_results)
-                        }
-                    }
+
+                        }//end of else
+                    }//wnd of when
                 } else {
-                    val question = mQuestionsList?.get(mCurrentPosition - 1)
 
                     // This is to check if the answer is wrong
-                    if (question!!.correctAnswer != mSelectedOptionPosition) {
+                    if (currentQuestion!!.correctAnswer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
                     } else {
                         mCorrectAnswers++
                     }
 
                     // This is for correct answer
-                    answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
+                    answerView(currentQuestion.correctAnswer, R.drawable.correct_option_border_bg)
 
                     if (mCurrentPosition == mQuestionsList!!.size) {
                         binding.btnSubmit.text = "FINISH"
@@ -147,12 +184,40 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
      */
     private fun setQuestion() {
 
-        val question =
-            mQuestionsList!!.get(mCurrentPosition - 1) // Getting the question from the list with the help of current position.
+        //select a question we haven't seen before
+
+        if(mCurrentPosition == 1){
+            QID = (0..(mQuestionsList!!.size-1)).shuffled().last()
+            currentQuestion = mQuestionsList!!.get(QID)
+            while((currentQuestion.difficulty != currentDifficulty)){
+                QID = (0..(mQuestionsList!!.size-1)).shuffled().last()
+                currentQuestion = mQuestionsList!!.get(QID)
+            }
+            doneQs.add(QID)
+            while((currentQuestion.difficulty != currentDifficulty)){
+                QID = (0..(mQuestionsList!!.size-1)).shuffled().last()
+                currentQuestion = mQuestionsList!!.get(QID)
+            }
+            doneQs.add(QID)
+        }
+        else {
+
+            QID = (0..(mQuestionsList!!.size - 1)).shuffled().last()
+            currentQuestion = mQuestionsList!!.get(QID)
+            while (doneQs.contains(QID) || (currentQuestion.difficulty != currentDifficulty)) {
+                QID = (0..(mQuestionsList!!.size - 1)).shuffled().last()
+                currentQuestion = mQuestionsList!!.get(QID)
+            }
+            doneQs.add(QID)
+        }
+
+
+
+
 
         defaultOptionsView()
 
-        if (mCurrentPosition == mQuestionsList!!.size) {
+        if (mCurrentPosition == 10) {
             binding.btnSubmit.text = "FINISH"
         } else {
             binding.btnSubmit.text = "SUBMIT"
@@ -161,11 +226,11 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
         binding.progressBar.progress = mCurrentPosition
         binding.tvProgress.text = "$mCurrentPosition" + "/" + binding.progressBar.getMax()
 
-        binding.tvQuestion.text = question.question
-        binding.tvOptionOne.text = question.optionOne
-        binding.tvOptionTwo.text = question.optionTwo
-        binding.tvOptionThree.text = question.optionThree
-        binding.tvOptionFour.text = question.optionFour
+        binding.tvQuestion.text = currentQuestion.question
+        binding.tvOptionOne.text =currentQuestion.optionOne
+        binding.tvOptionTwo.text = currentQuestion.optionTwo
+        binding.tvOptionThree.text = currentQuestion.optionThree
+        binding.tvOptionFour.text = currentQuestion.optionFour
     }
 
     /**

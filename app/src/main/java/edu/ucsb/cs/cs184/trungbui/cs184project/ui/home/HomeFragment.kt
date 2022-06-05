@@ -144,23 +144,23 @@ class HomeFragment : Fragment() {
                 Log.d(TAG, "firebaseAuthWithGoogleAccount - email: ${email}")
                 Log.d(TAG, "firebaseAuthWithGoogleAccount - name: ${name}")
 
-                database = FirebaseDatabase.getInstance().getReference("users")
-                val user = User(name, 0, email)
-                database.child(name!!).setValue(user)
-
-                database = FirebaseDatabase.getInstance().getReference("users")
-                database.keepSynced(true)
-
-
-
                 // Check if the user is new or existing
                 if (authResult.additionalUserInfo!!.isNewUser) {
                     // User is new - account created
                     Log.d(TAG, "firebaseAuthWithGoogleAccout: Account created: ${email}")
+
+                    database = FirebaseDatabase.getInstance().getReference("users")
+                    val user = User(name, 0, email, 0)
+                    database.child(name!!).setValue(user)
+
                 } else {
                     // Exisiting user
                     Log.d(TAG, "firebaseAuthWithGoogleAccount - existing user")
                 }
+
+                database = FirebaseDatabase.getInstance().getReference("users")
+                database.keepSynced(true)
+
                 checkUser()
             }
             .addOnFailureListener { e ->
