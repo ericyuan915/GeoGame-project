@@ -8,7 +8,7 @@
         <entry key="app/src/main/res/layout/content_main.xml" value="0.20018115942028986" />
         <entry key="app/src/main/res/layout/fragment_difficulty.xml" value="0.10277777777777777" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.2111111111111111" />
-        <entry key="app/src/main/res/layout/fragment_gm_results.xml" value="0.2554347826086957" />
+        <entry key="app/src/main/res/layout/fragment_gm_difficulty.xml" value="0.1033434650455927" />
         <entry key="app/src/main/res/layout/fragment_google_maps.xml" value="0.2111111111111111" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2675708052040874" />
         <entry key="app/src/main/res/layout/fragment_maps_leaderboard.xml" value="0.1" />
