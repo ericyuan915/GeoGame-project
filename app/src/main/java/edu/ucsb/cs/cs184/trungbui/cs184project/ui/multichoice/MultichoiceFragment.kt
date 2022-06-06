@@ -48,6 +48,7 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
     lateinit var multichoiceViewModel: MultichoiceViewModel
     var currentDifficulty:Char = 'e'
     var optionSelected = false
+    var questionAnswered = false
 //    val toastText = "Please select an option"
 //    val toastDuration = Toast.LENGTH_SHORT
 //    val toast = Toast.makeText(applicationContext, toastText, toastDuration)
@@ -99,23 +100,31 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
         when (v) {
 
             binding.tvOptionOne -> {
-                optionSelected = true
-                selectedOptionView(binding.tvOptionOne, 1)
+                if (!questionAnswered) {
+                    optionSelected = true
+                    selectedOptionView(binding.tvOptionOne, 1)
+                }
             }
 
             binding.tvOptionTwo -> {
-                optionSelected = true
-                selectedOptionView(binding.tvOptionTwo, 2)
+                if (!questionAnswered) {
+                    optionSelected = true
+                    selectedOptionView(binding.tvOptionTwo, 2)
+                }
             }
 
             binding.tvOptionThree -> {
-                optionSelected = true
-                selectedOptionView(binding.tvOptionThree, 3)
+                if (!questionAnswered) {
+                    optionSelected = true
+                    selectedOptionView(binding.tvOptionThree, 3)
+                }
             }
 
             binding.tvOptionFour -> {
-                optionSelected = true
-                selectedOptionView(binding.tvOptionFour, 4)
+                if (!questionAnswered) {
+                    optionSelected = true
+                    selectedOptionView(binding.tvOptionFour, 4)
+                }
             }
 
             binding.btnSubmit -> {
@@ -125,6 +134,7 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
                 }
                 else {
                     optionSelected = false
+                    questionAnswered = true
                     if (mSelectedOptionPosition == 0) {
 
                         mCurrentPosition++
@@ -138,6 +148,7 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
 //            binding.tvQuestion.text  = currentDifficulty.toString()
 
                                 }
+                                questionAnswered = false
                                 setQuestion()
                             }
                             else -> {
