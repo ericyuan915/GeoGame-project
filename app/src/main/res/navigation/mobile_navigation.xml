@@ -36,7 +36,21 @@
         android:id="@+id/nav_google_maps"
         android:name="edu.ucsb.cs.cs184.trungbui.cs184project.ui.google_maps.GoogleMapsFragment"
         android:label="@string/menu_google_maps"
-        tools:layout="@layout/fragment_google_maps" />
+        tools:layout="@layout/fragment_google_maps" >
+        <action
+            android:id="@+id/action_nav_google_maps_to_nav_gm_results"
+            app:destination="@id/nav_gm_results" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_gm_results"
+        android:name="edu.ucsb.cs.cs184.trungbui.cs184project.ui.google_maps.GMResultsFragment"
+        android:label="@string/menu_gm_results"
+        tools:layout="@layout/fragment_gm_results" >
+        <action
+            android:id="@+id/action_nav_gm_results_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_results"
@@ -57,5 +71,13 @@
         <action
             android:id="@+id/action_difficultyFragment_to_nav_multichoice"
             app:destination="@id/nav_multichoice" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_gm_difficulty"
+        android:name="edu.ucsb.cs.cs184.trungbui.cs184project.ui.google_maps.GMDifficultyFragment"
+        android:label="GMDifficultyFragment" >
+        <action
+            android:id="@+id/action_GMDifficultyFragment_to_nav_google_maps"
+            app:destination="@id/nav_google_maps" />
     </fragment>
 </navigation>
