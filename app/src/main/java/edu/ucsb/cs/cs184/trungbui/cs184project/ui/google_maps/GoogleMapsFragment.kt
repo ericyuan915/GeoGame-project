@@ -47,6 +47,12 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
 
     private lateinit var mMap: GoogleMap
     lateinit var googlemapsViewModel: GoogleMapsViewModel
+
+    private val doneQs = mutableListOf<Int>()
+    private var QID:Int = 0
+    private lateinit var currentQuestion:Question
+
+
     var currentDifficulty:Char = 'e'
     var zoomMultiplier:Double = 1.0
     var optionSelected = false
@@ -141,17 +147,16 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
                             }
                         }
                     } else {
-                        val question = mQuestionsList?.get(mCurrentPosition - 1)
 
                         // This is to check if the answer is wrong
-                        if (question!!.correctAnswer != mSelectedOptionPosition) {
+                        if (currentQuestion!!.correctAnswer != mSelectedOptionPosition) {
                             answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
                         } else {
                             mCorrectAnswers++
                         }
 
                         // This is for correct answer
-                        answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
+                        answerView(currentQuestion.correctAnswer, R.drawable.correct_option_border_bg)
 
                         if (mCurrentPosition == mQuestionsList!!.size) {
                             optionSelected = true
@@ -173,12 +178,28 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
      */
     private fun setQuestion() {
 
-        if(currentDifficulty == 'e'){zoomMultiplier = 0.8}
+        if(currentDifficulty == 'e'){zoomMultiplier = 0.9}
         if(currentDifficulty == 'm'){zoomMultiplier = 1.1}
         if(currentDifficulty == 'h'){zoomMultiplier = 1.3}
 
-        val question =
-            mQuestionsList!!.get(mCurrentPosition - 1) // Getting the question from the list with the help of current position.
+//        val question =
+//            mQuestionsList!!.get(mCurrentPosition - 1) // Getting the question from the list with the help of current position.
+
+        if(mCurrentPosition == 1){
+            QID = (0..(mQuestionsList!!.size-1)).shuffled().last()
+            currentQuestion = mQuestionsList!!.get(QID)
+            doneQs.add(QID)
+            doneQs.add(QID)
+        }
+        else {
+            QID = (0..(mQuestionsList!!.size - 1)).shuffled().last()
+            currentQuestion = mQuestionsList!!.get(QID)
+            while (doneQs.contains(QID)) {
+                QID = (0..(mQuestionsList!!.size - 1)).shuffled().last()
+                currentQuestion = mQuestionsList!!.get(QID)
+            }
+            doneQs.add(QID)
+        }
 
         defaultOptionsView()
 
@@ -191,7 +212,7 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
         binding.progressBar.progress = mCurrentPosition
         binding.tvProgress.text = "$mCurrentPosition" + "/" + binding.progressBar.getMax()
 
-        val new_coord = LatLng(question.lat, question.long)
+        val new_coord = LatLng(currentQuestion.lat, currentQuestion.long)
 
         mMarker1?.remove()
 
@@ -202,10 +223,10 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
             (5.0f * zoomMultiplier).toFloat()
         ))
 
-        binding.tvOptionOne.text = question.optionOne
-        binding.tvOptionTwo.text = question.optionTwo
-        binding.tvOptionThree.text = question.optionThree
-        binding.tvOptionFour.text = question.optionFour
+        binding.tvOptionOne.text = currentQuestion.optionOne
+        binding.tvOptionTwo.text = currentQuestion.optionTwo
+        binding.tvOptionThree.text = currentQuestion.optionThree
+        binding.tvOptionFour.text = currentQuestion.optionFour
     }
 
     /**

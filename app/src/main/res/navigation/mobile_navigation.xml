@@ -75,7 +75,7 @@
     <fragment
         android:id="@+id/nav_gm_difficulty"
         android:name="edu.ucsb.cs.cs184.trungbui.cs184project.ui.google_maps.GMDifficultyFragment"
-        android:label="GMDifficultyFragment" >
+        android:label="" >
         <action
             android:id="@+id/action_GMDifficultyFragment_to_nav_google_maps"
             app:destination="@id/nav_google_maps" />
