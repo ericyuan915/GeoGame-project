@@ -21,7 +21,7 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_multichoice" />
         <item
-            android:id="@+id/nav_google_maps"
+            android:id="@+id/nav_gm_difficulty"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_google_maps" />
     </group>
