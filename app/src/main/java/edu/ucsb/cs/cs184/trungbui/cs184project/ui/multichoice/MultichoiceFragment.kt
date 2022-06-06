@@ -1,5 +1,6 @@
 package edu.ucsb.cs.cs184.trungbui.cs184project.ui.multichoice
 
+import android.app.Activity
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -12,7 +13,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
@@ -20,9 +20,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import edu.ucsb.cs.cs184.trungbui.cs184project.R
-import edu.ucsb.cs.cs184.trungbui.cs184project.User
 import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentMultichoiceBinding
 
 
@@ -49,6 +47,10 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
 
     lateinit var multichoiceViewModel: MultichoiceViewModel
     var currentDifficulty:Char = 'e'
+    var optionSelected = false
+//    val toastText = "Please select an option"
+//    val toastDuration = Toast.LENGTH_SHORT
+//    val toast = Toast.makeText(applicationContext, toastText, toastDuration)
 
 
     override fun onCreateView(
@@ -97,83 +99,94 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
         when (v) {
 
             binding.tvOptionOne -> {
-
+                optionSelected = true
                 selectedOptionView(binding.tvOptionOne, 1)
             }
 
             binding.tvOptionTwo -> {
-
+                optionSelected = true
                 selectedOptionView(binding.tvOptionTwo, 2)
             }
 
             binding.tvOptionThree -> {
-
+                optionSelected = true
                 selectedOptionView(binding.tvOptionThree, 3)
             }
 
             binding.tvOptionFour -> {
-
+                optionSelected = true
                 selectedOptionView(binding.tvOptionFour, 4)
             }
 
             binding.btnSubmit -> {
 
-                if (mSelectedOptionPosition == 0) {
+                if (!optionSelected) {
+                    Toast.makeText(getActivity(),"Please select an option", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    optionSelected = false
+                    if (mSelectedOptionPosition == 0) {
 
-                    mCurrentPosition++
+                        mCurrentPosition++
 
-                    when {
+                        when {
 
-                        mCurrentPosition <= 10 -> {
+                            mCurrentPosition <= 10 -> {
 
-                            setFragmentResultListener(R.string.difficulty_multichoice_request_key.toString()) { _, bundle ->
-                                currentDifficulty = bundle.getChar("difficulty")
+                                setFragmentResultListener(R.string.difficulty_multichoice_request_key.toString()) { _, bundle ->
+                                    currentDifficulty = bundle.getChar("difficulty")
 //            binding.tvQuestion.text  = currentDifficulty.toString()
 
+                                }
+                                setQuestion()
                             }
-                            setQuestion()
+                            else -> {
+                                // END OF GAME CONDITION
+                                Log.d("MultiChoiceFragment", "mCorrectAnswers = $mCorrectAnswers")
+                                Log.d("MultiChoiceFragment", "mCurrentPosition = $mCurrentPosition")
+
+                                // Saving current value to the view model
+                                multichoiceViewModel.correctAnswers.value = mCorrectAnswers.toString()
+                                multichoiceViewModel.totalQuestions.value = mCurrentPosition.toString()
+
+                                // Passing the correct result to the result fragment
+                                val bundle = bundleOf(
+                                    Pair("correctAnswers", mCorrectAnswers),
+                                    Pair("totalQuestions", mCurrentPosition - 1),
+                                    Pair("gameDifficulty", currentDifficulty)
+                                )
+                                setFragmentResult(R.string.multichoice_result_request_key.toString(), bundle)
+
+                                // Navigating to the result fragment
+                                findNavController().navigate(R.id.action_nav_multichoice_to_nav_results)
+
+                            }//end of else
+                        }//wnd of when
+                    } else {
+
+                        // This is to check if the answer is wrong
+                        if (currentQuestion!!.correctAnswer != mSelectedOptionPosition) {
+                            answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                        } else {
+                            mCorrectAnswers++
                         }
-                        else -> {
-                            // END OF GAME CONDITION
-                            Log.d("MultiChoiceFragment", "mCorrectAnswers = $mCorrectAnswers")
-                            Log.d("MultiChoiceFragment", "mCurrentPosition = $mCurrentPosition")
 
-                            // Saving current value to the view model
-                            multichoiceViewModel.correctAnswers.value = mCorrectAnswers.toString()
-                            multichoiceViewModel.totalQuestions.value = mCurrentPosition.toString()
+                        // This is for correct answer
+                        answerView(
+                            currentQuestion.correctAnswer,
+                            R.drawable.correct_option_border_bg
+                        )
 
-                            // Passing the correct result to the result fragment
-                            val bundle = bundleOf(
-                                Pair("correctAnswers", mCorrectAnswers),
-                                Pair("totalQuestions", mCurrentPosition),
-                                Pair("gameDifficulty", currentDifficulty)
-                            )
-                            setFragmentResult(R.string.multichoice_result_request_key.toString(), bundle)
+                        if (mCurrentPosition + 1 == mQuestionsList!!.size) {
+                            optionSelected = true
+                            binding.btnSubmit.text = "FINISH"
+                        } else {
+                            optionSelected = true
+                            binding.btnSubmit.text = "GO TO NEXT QUESTION"
+                        }
 
-                            // Navigating to the result fragment
-                            findNavController().navigate(R.id.action_nav_multichoice_to_nav_results)
-
-                        }//end of else
-                    }//wnd of when
-                } else {
-
-                    // This is to check if the answer is wrong
-                    if (currentQuestion!!.correctAnswer != mSelectedOptionPosition) {
-                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
-                    } else {
-                        mCorrectAnswers++
+                        mSelectedOptionPosition = 0
                     }
-
-                    // This is for correct answer
-                    answerView(currentQuestion.correctAnswer, R.drawable.correct_option_border_bg)
-
-                    if (mCurrentPosition == mQuestionsList!!.size) {
-                        binding.btnSubmit.text = "FINISH"
-                    } else {
-                        binding.btnSubmit.text = "GO TO NEXT QUESTION"
-                    }
-
-                    mSelectedOptionPosition = 0
                 }
             }
         }
