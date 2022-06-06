@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -48,6 +49,7 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
     lateinit var googlemapsViewModel: GoogleMapsViewModel
     var currentDifficulty:Char = 'e'
     var zoomMultiplier:Double = 1.0
+    var optionSelected = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,78 +83,86 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
         when (v) {
 
             binding.tvOptionOne -> {
-
+                optionSelected = true
                 selectedOptionView(binding.tvOptionOne, 1)
             }
 
             binding.tvOptionTwo -> {
-
+                optionSelected = true
                 selectedOptionView(binding.tvOptionTwo, 2)
             }
 
             binding.tvOptionThree -> {
-
+                optionSelected = true
                 selectedOptionView(binding.tvOptionThree, 3)
             }
 
             binding.tvOptionFour -> {
-
+                optionSelected = true
                 selectedOptionView(binding.tvOptionFour, 4)
             }
 
             binding.btnSubmit -> {
 
-                if (mSelectedOptionPosition == 0) {
+                if (!optionSelected) {
+                    Toast.makeText(getActivity(),"Please select an option", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    optionSelected = false
+                    if (mSelectedOptionPosition == 0) {
 
-                    mCurrentPosition++
+                        mCurrentPosition++
 
-                    when {
+                        when {
 
-                        mCurrentPosition <= mQuestionsList!!.size -> {
+                            mCurrentPosition <= mQuestionsList!!.size -> {
 
-                            setQuestion()
+                                setQuestion()
+                            }
+                            else -> {
+                                // END OF GAME CONDITION
+                                // Log.d("MultiChoiceFragment", "mCorrectAnswers = $mCorrectAnswers")
+                                // Log.d("MultiChoiceFragment", "mCurrentPosition = $mCurrentPosition")
+
+                                // Saving current value to the view model
+                                googlemapsViewModel.correctAnswers.value = mCorrectAnswers.toString()
+                                googlemapsViewModel.totalQuestions.value = mCurrentPosition.toString()
+
+                                // Passing the correct result to the result fragment
+                                val bundle = bundleOf(
+                                    Pair("correctAnswers", mCorrectAnswers),
+                                    Pair("totalQuestions", mCurrentPosition-1),
+                                    Pair("gameDifficulty", currentDifficulty)
+                                )
+                                setFragmentResult(R.string.googlemaps_result_request_key.toString(), bundle)
+
+                                // Navigating to the result fragment
+                                findNavController().navigate(R.id.action_nav_google_maps_to_nav_gm_results)
+                            }
                         }
-                        else -> {
-                            // END OF GAME CONDITION
-                            // Log.d("MultiChoiceFragment", "mCorrectAnswers = $mCorrectAnswers")
-                            // Log.d("MultiChoiceFragment", "mCurrentPosition = $mCurrentPosition")
+                    } else {
+                        val question = mQuestionsList?.get(mCurrentPosition - 1)
 
-                            // Saving current value to the view model
-                            googlemapsViewModel.correctAnswers.value = mCorrectAnswers.toString()
-                            googlemapsViewModel.totalQuestions.value = mCurrentPosition.toString()
-
-                            // Passing the correct result to the result fragment
-                            val bundle = bundleOf(
-                                Pair("correctAnswers", mCorrectAnswers),
-                                Pair("totalQuestions", mCurrentPosition-1),
-                                Pair("gameDifficulty", currentDifficulty)
-                            )
-                            setFragmentResult(R.string.googlemaps_result_request_key.toString(), bundle)
-
-                            // Navigating to the result fragment
-                            findNavController().navigate(R.id.action_nav_google_maps_to_nav_gm_results)
+                        // This is to check if the answer is wrong
+                        if (question!!.correctAnswer != mSelectedOptionPosition) {
+                            answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                        } else {
+                            mCorrectAnswers++
                         }
+
+                        // This is for correct answer
+                        answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
+
+                        if (mCurrentPosition == mQuestionsList!!.size) {
+                            optionSelected = true
+                            binding.btnSubmit.text = "FINISH"
+                        } else {
+                            optionSelected = true
+                            binding.btnSubmit.text = "GO TO NEXT QUESTION"
+                        }
+
+                        mSelectedOptionPosition = 0
                     }
-                } else {
-                    val question = mQuestionsList?.get(mCurrentPosition - 1)
-
-                    // This is to check if the answer is wrong
-                    if (question!!.correctAnswer != mSelectedOptionPosition) {
-                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
-                    } else {
-                        mCorrectAnswers++
-                    }
-
-                    // This is for correct answer
-                    answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
-
-                    if (mCurrentPosition == mQuestionsList!!.size) {
-                        binding.btnSubmit.text = "FINISH"
-                    } else {
-                        binding.btnSubmit.text = "GO TO NEXT QUESTION"
-                    }
-
-                    mSelectedOptionPosition = 0
                 }
             }
         }
