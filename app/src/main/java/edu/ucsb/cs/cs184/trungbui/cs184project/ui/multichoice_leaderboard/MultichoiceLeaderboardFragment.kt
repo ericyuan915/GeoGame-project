@@ -1,25 +1,20 @@
-package edu.ucsb.cs.cs184.trungbui.cs184project.ui.leaderboard
+package edu.ucsb.cs.cs184.trungbui.cs184project.ui.multichoice_leaderboard
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.getValue
 import edu.ucsb.cs.cs184.trungbui.cs184project.R
 import edu.ucsb.cs.cs184.trungbui.cs184project.User
-import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentLeaderboardBinding
+import edu.ucsb.cs.cs184.trungbui.cs184project.databinding.FragmentMultichoiceLeaderboardBinding
 
-class LeaderboardFragment : Fragment() {
+class MultichoiceLeaderboardFragment : Fragment() {
 
-    private var _binding: FragmentLeaderboardBinding? = null
+    private var _binding: FragmentMultichoiceLeaderboardBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -33,11 +28,11 @@ class LeaderboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
+        _binding = FragmentMultichoiceLeaderboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         // Fetching the leaderboard list view
-        leaderboardListView = root.findViewById<ListView>(R.id.leaderboard_list_view)
+        leaderboardListView = root.findViewById<ListView>(R.id.multichoice_leaderboard_list_view)
 
         database = FirebaseDatabase.getInstance().getReference("users")
         database.keepSynced(true)
@@ -50,25 +45,28 @@ class LeaderboardFragment : Fragment() {
             override fun onDataChange(data: DataSnapshot) {
                 val userlist = mutableListOf<User>()
 
-                Log.d("LeaderboardFragment", "onDataChange method")
+                Log.d("MultichoiceLeaderboardFragment", "onDataChange method")
                 data.children.forEach{
-                    val score = Integer.parseInt(it.child("score").value.toString())
+                    val multichoiceScore = Integer.parseInt(it.child("multichoiceScore").value.toString())
                     val name: String = it.child("name").value.toString()
                     val email: String = it.child("email").value.toString()
-                    userlist.add(User(name, score, email))
+                    val mapScore = Integer.parseInt(it.child("mapScore").value.toString())
+                    userlist.add(User(name, mapScore, email, multichoiceScore))
                 }
 
                 // SORT THE USER FROM HIGHEST TO LOWEST SCORE
                 val sortedUserList = userlist.sortedWith(Comparator { first: User, second: User ->
-                    if (first.score != second.score) {
-                        second.score - first.score
+                    if (first.multichoiceScore != second.multichoiceScore) {
+                        second.multichoiceScore - first.multichoiceScore
                     } else {
                         first.name!!.compareTo(second.name!!)
                     }
                 })
 
                 // Displaying list view
-                leaderboardListView.adapter = LeaderboardAdapter(requireContext(), sortedUserList)
+                if (context != null) {
+                    leaderboardListView.adapter = MultichoiceLeaderboardAdapter(requireContext(), sortedUserList)
+                }
 
             }
             override fun onCancelled(databaseError: DatabaseError) {
