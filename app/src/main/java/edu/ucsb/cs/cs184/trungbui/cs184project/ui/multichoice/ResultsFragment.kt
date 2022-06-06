@@ -91,9 +91,8 @@ class ResultsFragment : Fragment() {
                 binding.tvName.text = resultsViewModel.userName.value
                 binding.tvScore.text = resultsViewModel.resultText.value
             }
-
             binding.startOverBtn.setOnClickListener() {
-                findNavController().navigate(R.id.nav_mc_difficulty)
+                findNavController().navigate(R.id.action_nav_results_to_nav_mc_difficulty)
             }
         }
 

@@ -50,6 +50,7 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
     var currentDifficulty:Char = 'e'
     var zoomMultiplier:Double = 1.0
     var optionSelected = false
+    var questionAnswered = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,23 +84,31 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
         when (v) {
 
             binding.tvOptionOne -> {
-                optionSelected = true
-                selectedOptionView(binding.tvOptionOne, 1)
+                if (!questionAnswered) {
+                    optionSelected = true
+                    selectedOptionView(binding.tvOptionOne, 1)
+                }
             }
 
             binding.tvOptionTwo -> {
-                optionSelected = true
-                selectedOptionView(binding.tvOptionTwo, 2)
+                if (!questionAnswered) {
+                    optionSelected = true
+                    selectedOptionView(binding.tvOptionTwo, 2)
+                }
             }
 
             binding.tvOptionThree -> {
-                optionSelected = true
-                selectedOptionView(binding.tvOptionThree, 3)
+                if (!questionAnswered) {
+                    optionSelected = true
+                    selectedOptionView(binding.tvOptionThree, 3)
+                }
             }
 
             binding.tvOptionFour -> {
-                optionSelected = true
-                selectedOptionView(binding.tvOptionFour, 4)
+                if (!questionAnswered) {
+                    optionSelected = true
+                    selectedOptionView(binding.tvOptionFour, 4)
+                }
             }
 
             binding.btnSubmit -> {
@@ -109,6 +118,7 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
                 }
                 else {
                     optionSelected = false
+                    questionAnswered = true
                     if (mSelectedOptionPosition == 0) {
 
                         mCurrentPosition++
@@ -116,7 +126,7 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
                         when {
 
                             mCurrentPosition <= mQuestionsList!!.size -> {
-
+                                questionAnswered = false
                                 setQuestion()
                             }
                             else -> {

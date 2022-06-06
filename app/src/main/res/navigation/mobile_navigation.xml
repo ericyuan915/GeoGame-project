@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_nav_results_to_nav_home"
             app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_results_to_nav_mc_difficulty"
+            app:destination="@id/nav_mc_difficulty" />
     </fragment>
     <fragment
         android:id="@+id/nav_mc_difficulty"
