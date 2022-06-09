@@ -74,7 +74,8 @@ class ResultsFragment : Fragment() {
                 // Retrieve the user current mapScore to persist the data
                 database.child(name).get().addOnSuccessListener {
                     val mapScore = Integer.parseInt(it.child("mapScore").value.toString())
-                    val user = User(name, mapScore, email, (correctAnswers*scoreMultiplier))
+                    val careerMultiScore = Integer.parseInt(it.child("multichoiceScore").value.toString()) + (correctAnswers*scoreMultiplier)
+                    val user = User(name, mapScore, email, careerMultiScore)
                     // Record user score to the database
                     database.child(name).setValue(user)
                 }.addOnFailureListener{

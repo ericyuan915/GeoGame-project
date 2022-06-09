@@ -79,7 +79,8 @@ class GMResultsFragment : Fragment() {
                 // Retrieve the user current multichoiceScore to persist the data
                 database.child(name).get().addOnSuccessListener {
                     val multichoiceScore = Integer.parseInt(it.child("multichoiceScore").value.toString())
-                    val user = User(name, (correctAnswers*scoreMultiplier), email, multichoiceScore)
+                    val careerMapsScore = Integer.parseInt(it.child("mapScore").value.toString()) + (correctAnswers*scoreMultiplier)
+                    val user = User(name, careerMapsScore , email, multichoiceScore)
                     // Record user score to the database
                     database.child(name).setValue(user)
                 }.addOnFailureListener{
