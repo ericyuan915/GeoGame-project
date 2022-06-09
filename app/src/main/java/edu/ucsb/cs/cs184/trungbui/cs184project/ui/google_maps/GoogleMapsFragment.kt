@@ -131,7 +131,7 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
 
                         when {
 
-                            mCurrentPosition <= mQuestionsList!!.size -> {
+                            mCurrentPosition <= 10 -> {
                                 questionAnswered = false
                                 setQuestion()
                             }
@@ -168,7 +168,7 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
                         // This is for correct answer
                         answerView(currentQuestion.correctAnswer, R.drawable.correct_option_border_bg)
 
-                        if (mCurrentPosition == mQuestionsList!!.size) {
+                        if (mCurrentPosition == 10) {
                             optionSelected = true
                             binding.btnSubmit.text = "FINISH"
                         } else {
@@ -213,7 +213,7 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
 
         defaultOptionsView()
 
-        if (mCurrentPosition == mQuestionsList!!.size) {
+        if (mCurrentPosition == 10) {
             binding.btnSubmit.text = "FINISH"
         } else {
             binding.btnSubmit.text = "SUBMIT"
