@@ -15,7 +15,7 @@ object Constants {
     fun getQuestions(): ArrayList<Question> {
         val questionsList = ArrayList<Question>()
 
-        // 0 - starting at 0 so we can access these as indeces in the questions list
+        // 0 - starting at 0 so we can access these as indices in the questions list
         val que0 = Question(
             0,'e', "In what state is Mt. Rushmore?",
             "Colorado", "South Dakota",
@@ -207,7 +207,7 @@ object Constants {
         val que21 = Question(
             21, 'm',"Which of these states is the least populated?",
             "Arizona", "Wyoming",
-            "Deleware", "Rhode Island", 2
+            "Delaware", "Rhode Island", 2
         )
 
         questionsList.add(que21)
@@ -337,6 +337,223 @@ object Constants {
         )
 
         questionsList.add(que35)
+
+        // 36
+        val que36 = Question(
+            36, 'h',"Which of these states does NOT have the Northern Cardinal as its state bird?",
+            "Indiana", "Montana",
+            "Kentucky", "Illinois", 2
+        )
+
+        questionsList.add(que36)
+
+        // 37
+        val que37 = Question(
+            37, 'm',"What is the state bird of New York?",
+            "Northern Cardinal", "Mountain Bluebird",
+            "American Robin", "Eastern Bluebird", 4
+        )
+
+        questionsList.add(que37)
+
+        // 38
+        val que38 = Question(
+            38, 'e',"What is the state bird of California?",
+            "California Quail", "American Robin",
+            "Brown Pelican", "Eastern Bluebird", 1
+        )
+
+        questionsList.add(que38)
+
+        // 39
+        val que39 = Question(
+            39, 'm',"What is the state bird of Arizona?",
+            "Brown Thrasher", "Cactus Wren",
+            "Western Meadowlark", "Common Loon", 2
+        )
+
+        questionsList.add(que39)
+
+        // 40
+        val que40 = Question(
+            40, 'm',"What is the state bird of New Mexico?",
+            "Greater Roadrunner", "Northern Cardinal",
+            "Cactus Wren", "Ruffed Grouse", 1
+        )
+
+        questionsList.add(que40)
+
+        // 41
+        val que41 = Question(
+            41, 'h',"What is the state bird of Alaska?",
+            "Northern Mockingbird", "Mountain Bluebird",
+            "Chickadee", "Willow Ptarmigan", 4
+        )
+
+        questionsList.add(que41)
+
+        // 42
+        val que42 = Question(
+            42, 'h',"What was the 43rd state added to the US?",
+            "Colorado", "Texas",
+            "Idaho", "Oklahoma", 3
+        )
+
+        questionsList.add(que42)
+
+        // 43
+        val que43 = Question(
+            43, 'e',"How many states are there in the US?",
+            "52", "50",
+            "40", "55", 2
+        )
+
+        questionsList.add(que43)
+
+        // 44
+        val que44 = Question(
+            44, 'm',"What was the 9th state added to the US?",
+            "New Hampshire", "Rhode Island",
+            "New York", "Indiana", 1
+        )
+
+        questionsList.add(que44)
+
+        // 45
+        val que45 = Question(
+            45, 'e',"What was the most recent state added to the US?",
+            "Washington", "Hawaii",
+            "Alaska", "California", 2
+        )
+
+        questionsList.add(que45)
+
+
+        // 46
+        val que46 = Question(
+            46, 'h',"What was the 10th state added to the US?",
+            "Vermont", "Virgina",
+            "Connecticut", "Kentucky", 2
+        )
+
+        questionsList.add(que46)
+
+        // 47
+        val que47 = Question(
+            47, 'h',"What was the 30th state added to the US?",
+            "Texas", "Wisconsin",
+            "Nevada", "California", 2
+        )
+
+        questionsList.add(que47)
+
+        // 48
+        val que48 = Question(
+            48, 'm',"Which president was born in California?",
+            "Ronald Reagan", "Richard Nixon",
+            "Jimmy Carter", "George Bush", 2
+        )
+
+        questionsList.add(que48)
+
+        // 49
+        val que49 = Question(
+            49, 'm',"In what state was president Barack Obama born?",
+            "Ohio", "New York",
+            "Hawaii", "none of the above", 4
+        )
+
+        questionsList.add(que49)
+
+        // 50
+        val que50 = Question(
+            50, 'h',"Which state gave birth to the most presidents?",
+            "Washington", "Massachusetts",
+            "Virginia", "Ohio", 3
+        )
+
+        questionsList.add(que50)
+
+        // 51
+        val que51 = Question(
+            51, 'e',"In what state was president George Washington born?",
+            "Pennsylvania", "Virginia",
+            "Massachusetts", "none of the above", 4
+        )
+
+        questionsList.add(que51)
+
+        // 52
+        val que52 = Question(
+            52, 'm',"In what state is Yale University located in?",
+            "Connecticut", "Massachusetts",
+            "Illinois", "New York", 1
+        )
+
+        questionsList.add(que52)
+
+        // 53
+        val que53 = Question(
+            53, 'm',"In what state is Rice University located in?",
+            "Ohio", "Texas",
+            "California", "New York", 2
+        )
+
+        questionsList.add(que53)
+
+        // 54
+        val que54 = Question(
+            54, 'h',"In what state is the Coca-Cola Company headquarters located in?",
+            "Texas", "Illinois",
+            "Georgia", "Florida", 2
+        )
+
+        questionsList.add(que54)
+
+        // 55
+        val que55 = Question(
+            55, 'h',"How many states border Tennessee?",
+            "5", "6",
+            "7", "8", 4
+        )
+
+        questionsList.add(que55)
+
+        // 56
+        val que56 = Question(
+            56, 'h',"Which of the following states does NOT border Alabama?",
+            "Mississippi", "Virginia",
+            "Georgia", "Tennessee", 2
+        )
+
+        questionsList.add(que56)
+
+        // 57
+        val que57 = Question(
+            57, 'h',"Which is the following states borders Iowa?",
+            "Nebraska", "Michigan",
+            "Wyoming", "North Dakota", 1
+        )
+
+        questionsList.add(que57)
+
+        // 58
+        val que58 = Question(
+            58, 'h',"Which state borders only one other state?",
+            "Washington", "Rhode Island",
+            "Alaska", "Maine", 4
+        )
+
+        questionsList.add(que58)
+
+        // 59
+        val que59 = Question(
+            59, 'h',"Which state borders exactly 4 other states?",
+            "Minnesota", "Montana",
+            "Nevada", "Utah", 2
+        )
+
+        questionsList.add(que59)
 
 
 
