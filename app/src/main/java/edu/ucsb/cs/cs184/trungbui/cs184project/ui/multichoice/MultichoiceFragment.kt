@@ -49,9 +49,6 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
     var currentDifficulty:Char = 'e'
     var optionSelected = false
     var questionAnswered = false
-//    val toastText = "Please select an option"
-//    val toastDuration = Toast.LENGTH_SHORT
-//    val toast = Toast.makeText(applicationContext, toastText, toastDuration)
 
 
     override fun onCreateView(
@@ -66,7 +63,6 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
 
         setFragmentResultListener(R.string.difficulty_multichoice_request_key.toString()) { _, bundle ->
             currentDifficulty = bundle.getChar("difficulty")
-//            binding.tvQuestion.text  = currentDifficulty.toString()
 
         }
 
@@ -145,7 +141,6 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
 
                                 setFragmentResultListener(R.string.difficulty_multichoice_request_key.toString()) { _, bundle ->
                                     currentDifficulty = bundle.getChar("difficulty")
-//            binding.tvQuestion.text  = currentDifficulty.toString()
 
                                 }
                                 questionAnswered = false
@@ -172,7 +167,7 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
                                 findNavController().navigate(R.id.action_nav_multichoice_to_nav_results)
 
                             }//end of else
-                        }//wnd of when
+                        }//end of when
                     } else {
 
                         // This is to check if the answer is wrong
