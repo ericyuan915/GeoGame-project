@@ -15,7 +15,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="240dp"
         android:gravity="center"
-        android:text="Welcome to Geo Game!\nTest your knowledge of these United States!\n\nIn Multichoice mode, you answer questions to show what\n you know about the geography and history of each state\n\nIn Google Maps Mode, locate the marker given the\n surrounding map\n\nGood Luck!!!"
+        android:text="Welcome to Geo Game!\nTest your knowledge of these United States!\n\nIn Multichoice mode, you answer questions to show what\n you know about the geography and history of each state\n\nIn Google Maps Mode, locate the marker given the\n surrounding map\n\nThe leaderboards show your all time score\nEasy mode gives you 1 point per correct answer,\n Medium gives you 2 and Difficult gives you 3\n\nGood Luck!!!"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
