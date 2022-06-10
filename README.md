@@ -10,4 +10,4 @@ Trung Bui, Connor McIntosh, Corey Su, Dylan Sun, and Eric Yuan
 ## App Setup
 * To support the google maps game mode, add the line `MAPS_API_KEY={YOUR GOOGLE MAPS API KEY HERE}` to the local properties file in the gradle scripts
 * Device API 32 should be used to support current GUI implementation
-* In order for the google maps fragments to show, you must install Google Play services on Android Studio. This is acheived by navigating to Tools (in the toolbar) > SDK Manager > SDK Tools, checking the Google Play services checkbox, and clicking Apply and Ok
+* In order for the google maps fragments to show, you must install Google Play services on Android Studio. This is achieved by navigating to Tools (in the toolbar) > SDK Manager > SDK Tools, checking the Google Play services checkbox, and clicking Apply and Ok
