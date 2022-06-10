@@ -188,7 +188,7 @@ class MultichoiceFragment : Fragment(), View.OnClickListener {
                             R.drawable.correct_option_border_bg
                         )
 
-                        if (mCurrentPosition + 1 == mQuestionsList!!.size) {
+                        if (mCurrentPosition == 10) {
                             optionSelected = true
                             binding.btnSubmit.text = "FINISH"
                         } else {
