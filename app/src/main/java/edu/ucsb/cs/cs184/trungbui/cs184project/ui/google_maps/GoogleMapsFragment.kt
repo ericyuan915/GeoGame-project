@@ -137,8 +137,6 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
                             }
                             else -> {
                                 // END OF GAME CONDITION
-                                // Log.d("MultiChoiceFragment", "mCorrectAnswers = $mCorrectAnswers")
-                                // Log.d("MultiChoiceFragment", "mCurrentPosition = $mCurrentPosition")
 
                                 // Saving current value to the view model
                                 googlemapsViewModel.correctAnswers.value = mCorrectAnswers.toString()
@@ -191,9 +189,6 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
         if(currentDifficulty == 'e'){zoomMultiplier = 0.9}
         if(currentDifficulty == 'm'){zoomMultiplier = 1.1}
         if(currentDifficulty == 'h'){zoomMultiplier = 1.3}
-
-//        val question =
-//            mQuestionsList!!.get(mCurrentPosition - 1) // Getting the question from the list with the help of current position.
 
         if(mCurrentPosition == 1){
             QID = (0..(mQuestionsList!!.size-1)).shuffled().last()
@@ -315,14 +310,6 @@ class GoogleMapsFragment : Fragment(), View.OnClickListener, OnMapReadyCallback 
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
-        // Add a marker in CA and move the camera
-//        val sydney = LatLng(38.58, -121.49)
-//        mMap.addMarker(MarkerOptions()
-//            .position(sydney)
-//            .title("Marker in CA"))
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,5.0f))
-
 
         try {
             val success = googleMap.setMapStyle(

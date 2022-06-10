@@ -2,15 +2,15 @@
     <string name="app_name">cs184Project</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Geo Game</string>
+    <string name="nav_header_subtitle">US States Trivia app</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <string name="menu_login">Login</string>
     <string name="menu_multichoice_leaderboard">Multichoice Leaderboard</string>
     <string name="menu_maps_leaderboard">Maps Leaderboard</string>
-    <string name="menu_multichoice">Multichoice</string>
+    <string name="menu_multichoice">Multichoice Mode</string>
     <string name="your_web_client_id">461549182572-l58m4d4nvumpm0n5b3df5fpso4ol061j.apps.googleusercontent.com</string>
     <string name="menu_google_maps">Google Maps Mode</string>
     <string name="fragment_results">Results</string>
