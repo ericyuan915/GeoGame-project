@@ -1,4 +1,4 @@
-# CS184 Final Project: Geo Game App
+# Project: Geo Game App
 Trung Bui, Connor McIntosh, Corey Su, Dylan Sun, and Eric Yuan
  
  * For our mobile application, we created a game based upon knowledge of states in the United States. We created a game where users are tested upon their knowledge of states and rewarded for correctly guessing the state's capital, knowing the state based upon its geographical shape, or other facts and information about each state.
